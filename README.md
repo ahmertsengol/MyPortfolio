@@ -98,6 +98,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Ahmet Şengöl - [GitHub](https://github.com/ahmertsengol)
+Ahmet Mert Şengöl - [GitHub](https://github.com/ahmertsengol)
 
 Project Link: [https://github.com/ahmertsengol/MyPortfolio](https://github.com/ahmertsengol/MyPortfolio) 
