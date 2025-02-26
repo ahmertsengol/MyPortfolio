@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profesyonel yazılım geliştirici portföyü">
+    <title>Portföyüm | Yazılım Geliştirici</title>
+    <link rel="stylesheet" href="public/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#work" class="nav-link">Çalışmalarım</a></li>
+                <li><a href="#about" class="nav-link">Hakkımda</a></li>
+                <li><a href="#contact" class="nav-link">İletişim</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Tema Değiştir">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Full Stack<br>Yazılım Geliştirici</h1>
+            <p>Modern ve kullanıcı dostu web uygulamaları geliştiriyorum</p>
+            <div class="hero-cta">
+                <a href="#work" class="btn btn-primary">Çalışmalarımı Gör</a>
+                <a href="#contact" class="btn btn-outline">İletişime Geç</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work">
+        <div class="container">
+            <h2>Seçkin Projeler</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn" data-filter="all">Tümü</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="mobile">Mobil</button>
+                <button class="filter-btn" data-filter="desktop">Masaüstü</button>
+            </div>
+            <div class="projects-grid">
+                <!-- Projects will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Hakkımda</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Modern web teknolojileri kullanarak kullanıcı dostu ve ölçeklenebilir uygulamalar geliştiriyorum. Clean Code ve SOLID prensiplerine uygun kod yazıyorum.</p>
+                </div>
+                <div class="skills">
+                    <div class="skills-category">
+                        <h3>Frontend</h3>
+                        <div class="skills-grid"></div>
+                    </div>
+                    <div class="skills-category">
+                        <h3>Backend</h3>
+                        <div class="skills-grid"></div>
+                    </div>
+                    <div class="skills-category">
+                        <h3>Diğer</h3>
+                        <div class="skills-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Toggle -->
+    <button class="contact-toggle" id="contactToggle" aria-label="İletişim Formu">
+        <i class="fas fa-envelope"></i>
+    </button>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2><i class="fas fa-paper-plane"></i> Bana Ulaşın</h2>
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder=" " required>
+                    <label for="name">İsminiz</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label for="email">E-posta adresiniz</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder=" " required></textarea>
+                    <label for="message">Mesajınız</label>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <span>Gönder</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification"></div>
+    <script src="js/main.js"></script>
+</body>
+</html> 
