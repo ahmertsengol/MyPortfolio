@@ -1,0 +1,13 @@
+export { default as ClickSpark } from './ClickSpark';
+export { default as FuzzyText } from './FuzzyText';
+export { default as OrbBackground } from './OrbBackground';
+export { default as GooeyNav } from './GooeyNav';
+export { default as ModernNavbar } from './ModernNavbar';
+export { default as HeroSection } from './HeroSection';
+export { default as AboutSection } from './AboutSection';
+export { default as ProjectsSection } from './ProjectsSection';
+export { default as SkillsSection } from './SkillsSection';
+export { default as ContactSection } from './ContactSection';
+export { default as MetallicPaint } from './MetallicPaint';
+export { default as MetallicLogo } from './MetallicLogo';
+export { default as Particles } from './Particles'; 
