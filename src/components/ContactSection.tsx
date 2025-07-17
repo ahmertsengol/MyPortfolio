@@ -16,7 +16,7 @@ import {
   FileText,
   Sparkles,
   CheckCircle,
-  Heart
+  Rocket
 } from 'lucide-react';
 
 interface ContactInfo {
@@ -107,6 +107,7 @@ const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
+  const [hoveredContact, setHoveredContact] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -131,18 +132,21 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 px-6">
+    <section id="contact" className="relative py-20 px-6 particle-interactive">
       <div ref={ref} className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-16 particle-header"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold mb-6 particle-text"
+            whileHover={{ scale: 1.02 }}
+          >
             <span className="gradient-text">İletişime Geçin</span>
-          </h2>
+          </motion.h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Yeni projelerde iş birliği yapmaya her zaman açığım. Fikirlerinizi paylaşın, 
             birlikte harika şeyler yapalım.
@@ -156,29 +160,70 @@ const ContactSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
         >
-          {contactInfo.map((info) => {
+          {contactInfo.map((info, index) => {
             const Icon = info.icon;
+            const isHovered = hoveredContact === info.title;
             return (
               <motion.div
                 key={info.title}
-                className="text-center p-6 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 group particle-card"
+                className="text-center p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-300 group"
+                onMouseEnter={() => setHoveredContact(info.title)}
+                onMouseLeave={() => setHoveredContact(null)}
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${info.color} p-2.5 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                {/* Particle trail effect */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  animate={{
+                    background: isHovered 
+                      ? [
+                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
+                          'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
+                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
+                        ]
+                      : 'transparent'
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+
+                <motion.div 
+                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${info.color} p-2.5 mx-auto mb-4 particle-interactive transition-transform duration-300`}
+                  whileHover={{ scale: 1.1, rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <Icon className="w-full h-full text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{info.title}</h3>
+                </motion.div>
+                <motion.h3 
+                  className="text-lg font-bold text-white mb-2 particle-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  {info.title}
+                </motion.h3>
                 {info.link ? (
-                  <a
+                  <motion.a
                     href={info.link}
-                    className="text-gray-400 hover:text-blue-400 transition-colors duration-300 block"
+                    className="text-gray-400 hover:text-blue-400 transition-colors duration-300 block particle-interactive"
+                    whileHover={{ scale: 1.02 }}
                   >
                     {info.content}
-                  </a>
+                  </motion.a>
                 ) : (
                   <p className="text-gray-400">{info.content}</p>
                 )}
+
+                {/* Corner particle effect */}
+                <motion.div
+                  className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-0 particle-interactive"
+                  animate={{ 
+                    opacity: isHovered ? [0, 1, 0] : 0,
+                    scale: isHovered ? [1, 1.5, 1] : 1
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
               </motion.div>
             );
           })}
@@ -192,21 +237,38 @@ const ContactSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="lg:col-span-3"
           >
-            <div className="p-8 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 particle-card">
+            <motion.div 
+              className="p-8 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+              whileHover={{ scale: 1.01, y: -3 }}
+            >
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 particle-interactive"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <MessageSquare className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Mesaj Gönderin</h3>
+                </motion.div>
+                <motion.h3 
+                  className="text-2xl font-bold text-white particle-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  Mesaj Gönderin
+                </motion.h3>
               </div>
               
               {isSubmitted && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center gap-3"
+                  className="mb-6 p-4 rounded-xl glass-effect border border-green-500/30 flex items-center gap-3"
                 >
-                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <CheckCircle className="w-5 h-5 text-green-400" />
+                  </motion.div>
                   <span className="text-green-400">
                     Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağım.
                   </span>
@@ -221,18 +283,22 @@ const ContactSection: React.FC = () => {
                     transition={{ duration: 0.5, delay: 0.5 }}
                     className="relative group"
                   >
-                    <label className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3">
+                    <motion.label 
+                      className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3 particle-interactive"
+                      whileHover={{ x: 3 }}
+                    >
                       <User size={16} />
                       Adınız
-                    </label>
-                    <input
+                    </motion.label>
+                    <motion.input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
+                      className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
                       placeholder="Adınızı girin"
+                      whileFocus={{ scale: 1.02 }}
                     />
                   </motion.div>
 
@@ -242,18 +308,22 @@ const ContactSection: React.FC = () => {
                     transition={{ duration: 0.5, delay: 0.6 }}
                     className="relative group"
                   >
-                    <label className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3">
+                    <motion.label 
+                      className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3 particle-interactive"
+                      whileHover={{ x: 3 }}
+                    >
                       <AtSign size={16} />
                       E-posta
-                    </label>
-                    <input
+                    </motion.label>
+                    <motion.input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
+                      className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
                       placeholder="E-posta adresinizi girin"
+                      whileFocus={{ scale: 1.02 }}
                     />
                   </motion.div>
                 </div>
@@ -264,18 +334,22 @@ const ContactSection: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.7 }}
                   className="relative group"
                 >
-                  <label className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3">
+                  <motion.label 
+                    className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3 particle-interactive"
+                    whileHover={{ x: 3 }}
+                  >
                     <FileText size={16} />
                     Konu
-                  </label>
-                  <input
+                  </motion.label>
+                  <motion.input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
+                    className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
                     placeholder="Mesaj konusu"
+                    whileFocus={{ scale: 1.02 }}
                   />
                 </motion.div>
 
@@ -285,29 +359,34 @@ const ContactSection: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.8 }}
                   className="relative group"
                 >
-                  <label className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3">
+                  <motion.label 
+                    className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3 particle-interactive"
+                    whileHover={{ x: 3 }}
+                  >
                     <MessageSquare size={16} />
                     Mesajınız
-                  </label>
-                  <textarea
+                  </motion.label>
+                  <motion.textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none particle-form group-hover:border-gray-600"
+                    className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none particle-form group-hover:border-gray-600"
                     placeholder="Mesajınızı buraya yazın..."
+                    whileFocus={{ scale: 1.01 }}
                   />
                 </motion.div>
 
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold transition-all duration-300 particle-button ${
+                  className={`w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold transition-all duration-300 particle-button particle-magnetic ${
                     isSubmitting
                       ? 'bg-gray-600 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105'
+                      : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25'
                   } text-white`}
+                  whileHover={!isSubmitting ? { scale: 1.05, y: -2 } : {}}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -330,7 +409,7 @@ const ContactSection: React.FC = () => {
                   )}
                 </motion.button>
               </form>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Side Info */}
@@ -341,12 +420,24 @@ const ContactSection: React.FC = () => {
             className="lg:col-span-2 space-y-6"
           >
             {/* Social Links */}
-            <div className="p-6 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 particle-card">
+            <motion.div 
+              className="p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+              whileHover={{ scale: 1.02, y: -3 }}
+            >
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 particle-interactive"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white">Sosyal Medya</h3>
+                </motion.div>
+                <motion.h3 
+                  className="text-xl font-bold text-white particle-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  Sosyal Medya
+                </motion.h3>
               </div>
               
               <div className="space-y-4">
@@ -360,7 +451,7 @@ const ContactSection: React.FC = () => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 border border-white/5 hover:border-white/20 transition-all duration-300 group"
+                      className="flex items-center gap-4 p-4 rounded-xl glass-effect hover:border-white/30 transition-all duration-300 group particle-interactive"
                       onMouseEnter={() => setHoveredSocial(social.name)}
                       onMouseLeave={() => setHoveredSocial(null)}
                       whileHover={{ scale: 1.02, x: 5 }}
@@ -368,13 +459,35 @@ const ContactSection: React.FC = () => {
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                       transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                     >
-                      <div className={`p-3 rounded-lg bg-gradient-to-r ${social.color} text-white group-hover:scale-110 transition-transform duration-300`}>
+                      {/* Particle trail effect */}
+                      <motion.div
+                        className="absolute inset-0 pointer-events-none"
+                        animate={{
+                          background: isHovered 
+                            ? [
+                                'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)',
+                                'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)',
+                                'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)'
+                              ]
+                            : 'transparent'
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      />
+
+                      <motion.div 
+                        className={`p-3 rounded-lg bg-gradient-to-r ${social.color} text-white particle-interactive transition-transform duration-300`}
+                        whileHover={{ scale: 1.1, rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <Icon size={20} />
-                      </div>
+                      </motion.div>
                       <div className="flex-1">
-                        <div className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                        <motion.div 
+                          className="font-semibold text-white group-hover:text-blue-400 transition-colors particle-text"
+                          whileHover={{ scale: 1.02 }}
+                        >
                           {social.name}
-                        </div>
+                        </motion.div>
                         <div className="text-sm text-gray-400 mt-1">
                           {isHovered ? social.description : 'Takip edin'}
                         </div>
@@ -383,52 +496,97 @@ const ContactSection: React.FC = () => {
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
 
             {/* Quick Message */}
-            <div className="p-6 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 particle-card">
+            <motion.div 
+              className="p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+              whileHover={{ scale: 1.02, y: -3 }}
+            >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-teal-500">
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 particle-interactive"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <MessageSquare className="w-6 h-6 text-white" />
-                </div>
-                <h4 className="text-lg font-bold text-white">Hızlı İletişim</h4>
+                </motion.div>
+                <motion.h4 
+                  className="text-lg font-bold text-white particle-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  Hızlı İletişim
+                </motion.h4>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed mb-4">
                 Acil projeleriniz için WhatsApp üzerinden 7/24 ulaşabilirsiniz. 
                 Genellikle 1 saat içinde yanıtlarım.
               </p>
               <motion.button
-                className="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors duration-300 font-medium"
-                whileHover={{ scale: 1.05 }}
+                className="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors duration-300 font-medium particle-button particle-magnetic"
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 WhatsApp'ta Mesaj Gönder
               </motion.button>
-            </div>
+            </motion.div>
 
             {/* Availability */}
-            <div className="p-6 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 particle-card">
+            <motion.div 
+              className="p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+              whileHover={{ scale: 1.02, y: -3 }}
+            >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-red-500">
-                  <Heart className="w-6 h-6 text-white" />
-                </div>
-                <h4 className="text-lg font-bold text-white">Çalışma Durumu</h4>
+                <motion.div 
+                  className="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 particle-interactive"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Rocket className="w-6 h-6 text-white" />
+                </motion.div>
+                <motion.h4 
+                  className="text-lg font-bold text-white particle-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  Çalışma Durumu
+                </motion.h4>
               </div>
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <motion.div 
+                  className="flex items-center gap-3 particle-interactive"
+                  whileHover={{ x: 3 }}
+                >
+                  <motion.div 
+                    className="w-3 h-3 bg-green-400 rounded-full"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                   <span className="text-gray-300 text-sm">Şu anda yeni projeler alıyorum</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+                </motion.div>
+                <motion.div 
+                  className="flex items-center gap-3 particle-interactive"
+                  whileHover={{ x: 3 }}
+                >
+                  <motion.div 
+                    className="w-3 h-3 bg-blue-400 rounded-full"
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                  />
                   <span className="text-gray-300 text-sm">Uzun dönem projeler tercihim</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                </motion.div>
+                <motion.div 
+                  className="flex items-center gap-3 particle-interactive"
+                  whileHover={{ x: 3 }}
+                >
+                  <motion.div 
+                    className="w-3 h-3 bg-purple-400 rounded-full"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ duration: 1.8, repeat: Infinity, delay: 1 }}
+                  />
                   <span className="text-gray-300 text-sm">Remote çalışmaya uygunuм</span>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

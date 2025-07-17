@@ -9,10 +9,11 @@ import {
   Globe,
   Settings,
   Layers,
-  Zap,
   Star,
   Award,
-  Target
+  Target,
+  TrendingUp,
+  Brain
 } from 'lucide-react';
 
 interface Skill {
@@ -195,18 +196,21 @@ const SkillsSection: React.FC = () => {
   }, [isInView]);
 
   return (
-    <section id="skills" className="relative py-20 px-6">
+    <section id="skills" className="relative py-20 px-6 particle-interactive">
       <div ref={ref} className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-16 particle-header"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold mb-6 particle-text"
+            whileHover={{ scale: 1.02 }}
+          >
             <span className="gradient-text">Yeteneklerim</span>
-          </h2>
+          </motion.h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Modern teknolojiler ve araçlarla geliştirme sürecindeki uzmanlık alanlarım. 
             Her teknolojide sürekli kendimi geliştirmeye devam ediyorum.
@@ -225,16 +229,25 @@ const SkillsSection: React.FC = () => {
             return (
               <motion.div
                 key={idx}
-                className="text-center p-6 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 particle-card"
+                className="text-center p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} p-2.5 mx-auto mb-3`}>
+                <motion.div 
+                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} p-2.5 mx-auto mb-3 particle-interactive`}
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <Icon className="w-full h-full text-white" />
-                </div>
-                <div className="text-3xl font-bold text-white mb-2">
+                </motion.div>
+                <motion.div 
+                  className="text-3xl font-bold text-white mb-2"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.5 + idx * 0.1, type: "spring" }}
+                >
                   {counters[idx]}+
-                </div>
+                </motion.div>
                 <div className="text-sm text-gray-400">{stat.label}</div>
               </motion.div>
             );
@@ -255,41 +268,65 @@ const SkillsSection: React.FC = () => {
             return (
               <motion.div
                 key={category.title}
-                className={`flex-1 p-6 rounded-2xl cursor-pointer transition-all duration-500 ${
+                className={`flex-1 p-6 rounded-2xl cursor-pointer transition-all duration-500 particle-card particle-magnetic ${
                   isActive 
-                    ? 'bg-slate-950/70 border-2 border-blue-500/50' 
-                    : 'bg-slate-950/30 border border-white/10 hover:border-white/20'
-                } backdrop-blur-sm particle-card`}
+                    ? 'glass-effect border-2 border-blue-500/50' 
+                    : 'glass-effect hover:border-white/30'
+                }`}
                 onClick={() => setActiveCategory(index)}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} ${isActive ? 'scale-110' : ''} transition-transform duration-300`}>
+                  <motion.div 
+                    className={`p-3 rounded-xl bg-gradient-to-br ${category.color} transition-transform duration-300 particle-interactive`}
+                    animate={{ scale: isActive ? 1.1 : 1 }}
+                    whileHover={{ rotate: 180 }}
+                  >
                     <Icon className="w-6 h-6 text-white" />
-                  </div>
+                  </motion.div>
                   <div>
-                    <h3 className={`text-lg font-bold transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-300'}`}>
+                    <motion.h3 
+                      className={`text-lg font-bold transition-colors duration-300 particle-text ${isActive ? 'text-white' : 'text-gray-300'}`}
+                      whileHover={{ scale: 1.02 }}
+                    >
                       {category.title}
-                    </h3>
+                    </motion.h3>
                     <p className="text-sm text-gray-400">{category.subtitle}</p>
                   </div>
                 </div>
                 
                 {/* Skill count */}
                 <div className="flex items-center gap-2">
-                  <div className="text-2xl font-bold gradient-text">{category.skills.length}</div>
+                  <motion.div 
+                    className="text-2xl font-bold gradient-text"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
+                  >
+                    {category.skills.length}
+                  </motion.div>
                   <div className="text-sm text-gray-400">Teknoloji</div>
                 </div>
 
                 {/* Active indicator */}
                 {isActive && (
                   <motion.div
-                    layoutId="activeIndicator"
+                    layoutId="activeSkillIndicator"
                     className="mt-4 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
+
+                {/* Particle indicator */}
+                <motion.div
+                  className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full opacity-0 particle-interactive"
+                  animate={{ 
+                    opacity: isActive ? [0, 1, 0] : 0,
+                    scale: isActive ? [1, 1.5, 1] : 1
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
               </motion.div>
             );
           })}
@@ -314,33 +351,62 @@ const SkillsSection: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative p-6 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 group particle-card"
+                className="relative p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 group particle-card particle-magnetic"
                 onMouseEnter={() => setHoveredSkill(skill.name)}
                 onMouseLeave={() => setHoveredSkill(null)}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
                 {/* Background gradient on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl`} />
+                <motion.div 
+                  className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 rounded-2xl pointer-events-none`}
+                  animate={{ opacity: isHovered ? 0.1 : 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+                
+                {/* Particle trail effect */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  animate={{
+                    background: isHovered 
+                      ? [
+                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
+                          'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
+                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
+                        ]
+                      : 'transparent'
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
                 
                 <div className="relative z-10">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
+                      <motion.div 
+                        className={`p-3 rounded-xl bg-gradient-to-br ${skill.color} particle-interactive transition-transform duration-300`}
+                        whileHover={{ scale: 1.1, rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                      >
                         <Icon className="w-6 h-6 text-white" />
-                      </div>
+                      </motion.div>
                       <div>
-                        <h3 className="text-xl font-bold text-white group-hover:gradient-text transition-all duration-300">
+                        <motion.h3 
+                          className="text-xl font-bold text-white group-hover:gradient-text transition-all duration-300 particle-text"
+                          whileHover={{ scale: 1.02 }}
+                        >
                           {skill.name}
-                        </h3>
+                        </motion.h3>
                         <p className="text-sm text-gray-400">{skill.experience}</p>
                       </div>
                     </div>
                     
                     {/* Skill Level Badge */}
-                    <div className={`px-3 py-1 rounded-full bg-gradient-to-r ${skill.color} bg-opacity-20 border border-current border-opacity-30`}>
+                    <motion.div 
+                      className={`px-3 py-1 rounded-full bg-gradient-to-r ${skill.color} bg-opacity-20 border border-current border-opacity-30 particle-interactive`}
+                      whileHover={{ scale: 1.05 }}
+                    >
                       <span className="text-sm font-bold text-white">{skill.level}%</span>
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Description */}
@@ -391,6 +457,18 @@ const SkillsSection: React.FC = () => {
                       {skill.level > 90 ? 'Expert Level' : skill.level > 80 ? 'Advanced' : skill.level > 70 ? 'Intermediate' : 'Beginner'}
                     </span>
                   </motion.div>
+
+                  {/* Hover stats overlay */}
+                  <motion.div
+                    className="absolute top-4 right-4 flex items-center gap-2 opacity-0 pointer-events-none"
+                    animate={{ opacity: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex items-center gap-1 text-white text-xs glass-effect px-2 py-1 rounded-full">
+                      <TrendingUp size={10} />
+                      <span>Growing</span>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             );
@@ -404,18 +482,29 @@ const SkillsSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center"
         >
-          <div className="p-8 rounded-2xl bg-slate-950/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 particle-card">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Zap className="w-8 h-8 text-blue-400" />
-              <h3 className="text-2xl font-bold gradient-text">Sürekli Öğrenme</h3>
-            </div>
+          <motion.div 
+            className="p-8 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+            whileHover={{ scale: 1.02, y: -5 }}
+          >
+            <motion.div 
+              className="flex items-center justify-center gap-3 mb-4"
+              whileHover={{ scale: 1.05 }}
+            >
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                <Brain className="w-8 h-8 text-blue-400" />
+              </motion.div>
+              <h3 className="text-2xl font-bold gradient-text particle-text">Sürekli Öğrenme</h3>
+            </motion.div>
             <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed">
               Teknoloji dünyasındaki hızlı değişime ayak uydurmak için sürekli yeni teknolojiler 
               öğreniyor ve mevcut bilgilerimi güncel tutuyorum. Şu anda{' '}
               <span className="text-blue-400 font-medium">Web3, AI/ML ve Cloud Architecture</span>{' '}
               konularında kendimi geliştiriyorum.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
