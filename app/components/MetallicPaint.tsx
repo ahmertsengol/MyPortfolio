@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { logger } from "../utils/logger";
 import "./MetallicPaint.css";
 
 type ShaderParams = {
@@ -201,7 +202,7 @@ export default function MetallicPaint({
   const totalAnimationTime = useRef(0);
   const lastRenderTime = useRef(0);
 
-  function updateUniforms() {
+  const updateUniforms = useCallback(() => {
     if (!gl || !uniforms) return;
     gl.uniform1f(uniforms.u_edge, params.edge);
     gl.uniform1f(uniforms.u_patternBlur, params.patternBlur);
@@ -209,7 +210,7 @@ export default function MetallicPaint({
     gl.uniform1f(uniforms.u_patternScale, params.patternScale);
     gl.uniform1f(uniforms.u_refraction, params.refraction);
     gl.uniform1f(uniforms.u_liquid, params.liquid);
-  }
+  }, [gl, uniforms, params]);
 
   useEffect(() => {
     function initShader() {
@@ -236,7 +237,7 @@ export default function MetallicPaint({
         gl.compileShader(shader);
 
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-          console.error(
+          logger.error(
             "An error occurred compiling the shaders: " +
               gl.getShaderInfoLog(shader)
           );
@@ -267,7 +268,7 @@ export default function MetallicPaint({
       gl.linkProgram(program);
 
       if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-        console.error(
+        logger.error(
           "Unable to initialize the shader program: " +
             gl.getProgramInfoLog(program)
         );
@@ -308,12 +309,12 @@ export default function MetallicPaint({
 
     initShader();
     updateUniforms();
-  }, []);
+  }, [updateUniforms]);
 
   useEffect(() => {
     if (!gl || !uniforms) return;
     updateUniforms();
-  }, [gl, params, uniforms]);
+  }, [gl, params, uniforms, updateUniforms]);
 
   useEffect(() => {
     if (!gl || !uniforms) return;
@@ -336,7 +337,7 @@ export default function MetallicPaint({
     return () => {
       cancelAnimationFrame(renderId);
     };
-  }, [gl, params.speed]);
+  }, [gl, params.speed, uniforms]);
 
   useEffect(() => {
     const canvasEl = canvasRef.current;
@@ -398,7 +399,7 @@ export default function MetallicPaint({
 
       gl.uniform1i(uniforms.u_image_texture, 0);
     } catch (e) {
-      console.error("Error uploading texture:", e);
+      logger.error("Error uploading texture:", e);
     }
 
     return () => {

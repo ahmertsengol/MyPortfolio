@@ -292,6 +292,7 @@ const ContactSection: React.FC = () => {
                     </motion.label>
                     <motion.input
                       type="text"
+                      id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
@@ -299,6 +300,8 @@ const ContactSection: React.FC = () => {
                       className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
                       placeholder="Adınızı girin"
                       whileFocus={{ scale: 1.02 }}
+                      aria-describedby="name-description"
+                      aria-required="true"
                     />
                   </motion.div>
 
@@ -317,6 +320,7 @@ const ContactSection: React.FC = () => {
                     </motion.label>
                     <motion.input
                       type="email"
+                      id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
@@ -324,6 +328,8 @@ const ContactSection: React.FC = () => {
                       className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
                       placeholder="E-posta adresinizi girin"
                       whileFocus={{ scale: 1.02 }}
+                      aria-describedby="email-description"
+                      aria-required="true"
                     />
                   </motion.div>
                 </div>
@@ -343,6 +349,7 @@ const ContactSection: React.FC = () => {
                   </motion.label>
                   <motion.input
                     type="text"
+                    id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
@@ -350,6 +357,8 @@ const ContactSection: React.FC = () => {
                     className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
                     placeholder="Mesaj konusu"
                     whileFocus={{ scale: 1.02 }}
+                    aria-describedby="subject-description"
+                    aria-required="true"
                   />
                 </motion.div>
 
@@ -367,6 +376,7 @@ const ContactSection: React.FC = () => {
                     Mesajınız
                   </motion.label>
                   <motion.textarea
+                    id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
@@ -374,6 +384,8 @@ const ContactSection: React.FC = () => {
                     rows={6}
                     className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none particle-form group-hover:border-gray-600"
                     placeholder="Mesajınızı buraya yazın..."
+                    aria-describedby="message-description"
+                    aria-required="true"
                     whileFocus={{ scale: 1.01 }}
                   />
                 </motion.div>
@@ -391,6 +403,8 @@ const ContactSection: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.9 }}
+                  aria-label={isSubmitting ? 'Mesaj gönderiliyor' : 'Mesajı gönder'}
+                  aria-disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     <>

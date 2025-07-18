@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { 
   Code2, Lightbulb, Target, Users, Coffee, 
   Calendar, MapPin, Mail, Trophy, Star, Zap 
@@ -85,12 +85,12 @@ const AboutSection: React.FC = () => {
     }
   ];
 
-  const stats = [
+  const stats = useMemo(() => [
     { label: "Tamamlanan Proje", value: 25, icon: Trophy, color: "from-blue-500 to-cyan-500" },
     { label: "Mutlu Müşteri", value: 15, icon: Star, color: "from-purple-500 to-pink-500" },
     { label: "Kod Satırı", value: 50000, icon: Code2, color: "from-green-500 to-teal-500" },
     { label: "Kahve", value: 1247, icon: Coffee, color: "from-orange-500 to-red-500" }
-  ];
+  ], []);
 
   // Counter animation for stats
   const [counters, setCounters] = useState(stats.map(() => 0));
@@ -117,7 +117,7 @@ const AboutSection: React.FC = () => {
         }, 16);
       });
     }
-  }, [isInView]);
+  }, [isInView, stats]);
 
   return (
     <section id="about" className="relative py-20 px-6 particle-interactive">

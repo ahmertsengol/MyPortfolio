@@ -276,6 +276,15 @@ const SkillsSection: React.FC = () => {
                 onClick={() => setActiveCategory(index)}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
+                role="button"
+                tabIndex={0}
+                aria-label={`${category.title} kategorisini seç`}
+                aria-pressed={isActive}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setActiveCategory(index);
+                  }
+                }}
               >
                 <div className="flex items-center gap-4 mb-4">
                   <motion.div 

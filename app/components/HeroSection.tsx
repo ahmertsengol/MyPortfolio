@@ -92,6 +92,7 @@ const HeroSection: React.FC = () => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="Projeler bölümüne git"
           >
             Projelerimi İncele
           </motion.button>
@@ -101,6 +102,7 @@ const HeroSection: React.FC = () => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="İletişim bölümüne git"
           >
             İletişime Geç
           </motion.button>
@@ -142,6 +144,14 @@ const HeroSection: React.FC = () => {
         transition={{ duration: 1, delay: 3 }}
         className="absolute bottom-6 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
         onClick={scrollToNext}
+        role="button"
+        tabIndex={0}
+        aria-label="Aşağı kaydır"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            scrollToNext();
+          }
+        }}
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 interface FuzzyTextProps {
@@ -16,14 +16,14 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 }) => {
   const [displayText, setDisplayText] = useState(text);
   const [isAnimating, setIsAnimating] = useState(false);
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const getRandomChar = () => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
     return chars[Math.floor(Math.random() * chars.length)];
   };
 
-  const animateText = () => {
+  const animateText = useCallback(() => {
     if (isAnimating) return;
     
     setIsAnimating(true);
@@ -51,14 +51,14 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       iteration += 1 / 3;
     }, 30);
-  };
+  }, [isAnimating, text]);
 
   useEffect(() => {
     if (trigger) {
       const timer = setTimeout(animateText, delay * 1000);
       return () => clearTimeout(timer);
     }
-  }, [trigger, delay]);
+  }, [trigger, delay, animateText]);
 
   useEffect(() => {
     return () => {

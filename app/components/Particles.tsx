@@ -349,6 +349,8 @@ const Particles: React.FC<ParticlesProps> = ({
     sizeRandomness,
     cameraDistance,
     disableRotation,
+    activeSection,
+    particleColors,
   ]);
 
   // Update colors when section changes

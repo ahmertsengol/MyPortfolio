@@ -1,0 +1,17 @@
+{
+  "name": "Ahmet Mert Şengöl - Portfolio",
+  "short_name": "AMS Portfolio",
+  "description": "Fırat Üniversitesi Yazılım Mühendisliği öğrencisi portfolyosu",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#6366f1",
+  "background_color": "#0f172a",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait-primary"
+} 

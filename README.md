@@ -1,156 +1,225 @@
-# 🚀 Modern Portfolio Website
+# 🚀 Modern Portfolio - Next.js
 
-Modern ve interaktif bir portfolio sitesi. [React Bits](https://reactbits.dev/) bileşenleri kullanılarak geliştirilmiştir.
+Ahmet Mert Şengöl'ün kişisel portfolio websitesi. Modern teknolojiler ve yaratıcı tasarım ile oluşturulmuş, AI/ML, Computer Vision ve algoritma projelerini sergileyen interaktif bir platform.
+
+![Portfolio Preview](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop)
 
 ## ✨ Özellikler
 
-- **Splash Cursor Effect** - İnteraktif mouse takip efekti
-- **Fuzzy Text Animation** - Matrix tarzı metin animasyonu
-- **Orb Background** - Hareketli arkaplan orb efektleri
-- **Gooey Navigation** - Akışkan navigasyon menüsü
-- **Smooth Scroll** - Yumuşak sayfa geçişleri
-- **Responsive Design** - Tüm cihazlarda uyumlu
-- **Glass Effect** - Modern cam efekti tasarımları
-- **Framer Motion** - Profesyonel animasyonlar
+### 🎨 **Modern Tasarım**
+- **Glass Morphism** efektleri
+- **Partikül sistemi** ile interaktif arka plan
+- **Framer Motion** animasyonları
+- **Responsive** tasarım (Mobile-first)
+- **Dark theme** optimizasyonu
 
-## 🛠️ Teknolojiler
+### 🔧 **Teknoloji Stack**
+- **Next.js 15** - App Router
+- **React 19** - Modern React özellikleri
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS
+- **Framer Motion** - Animasyonlar
+- **OGL** - WebGL partikül sistemi
+- **Lucide React** - Modern ikonlar
 
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
-- **TailwindCSS** - Utility-first CSS framework
-- **Framer Motion** - Animation library
-- **Lucide React** - Beautiful icons
+### 📱 **Bölümler**
+- 🏠 **Hero Section** - Etkileyici giriş
+- 👨‍💻 **About** - Kişisel bilgiler ve deneyim
+- 🛠️ **Skills** - Teknik yetenekler
+- 📂 **Projects** - GitHub entegrasyonlu projeler
+- 📧 **Contact** - İletişim formu
 
-## 📦 Kurulum
+## 🛠️ Kurulum
 
+### Gereksinimler
+- **Node.js** 18.0.0 veya üzeri
+- **npm** veya **yarn** paket yöneticisi
+
+### 1️⃣ Projeyi İndirin
 ```bash
-# Projeyi klonlayın
-git clone <repository-url>
+git clone https://github.com/ahmertsengol/modern-portfolio.git
 cd modern-portfolio
+```
 
-# Bağımlılıkları yükleyin
+### 2️⃣ Bağımlılıkları Yükleyin
+```bash
 npm install
-
-# Development server'ı başlatın
-npm run dev
-
-# Production build oluşturun
-npm run build
-
-# Build'i önizleyin
-npm run preview
+# veya
+yarn install
 ```
 
-## 🎨 Bileşenler
-
-### SplashCursor
-İnteraktif mouse takip efekti ve tıklama animasyonları.
-
-### FuzzyText
-Matrix tarzı karakter değişim animasyonu ile metin efektleri.
-
-### OrbBackground
-Hareketli ve renkli arkaplan orb efektleri.
-
-### GooeyNav
-Responsive ve akışkan navigasyon menüsü.
-
-### HeroSection
-Ana tanıtım bölümü with gradient text ve animasyonlar.
-
-### AboutSection
-Kişisel bilgiler, özellikler ve istatistikler.
-
-### SkillsSection
-Kategorize edilmiş yetenekler ve progress barları.
-
-### ProjectsSection
-Filtreli proje galerisi ve hover efektleri.
-
-### ContactSection
-İletişim formu ve sosyal medya linkleri.
-
-## 🎯 Kullanım
-
-### Geliştirme
-
+### 3️⃣ Geliştirme Sunucusunu Başlatın
 ```bash
 npm run dev
+# veya
+yarn dev
 ```
 
-Proje `http://localhost:5173` adresinde çalışacaktır.
+Tarayıcınızda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-### Production
+## 📜 Mevcut Scripts
 
 ```bash
+# Geliştirme sunucusu
+npm run dev
+
+# Production build
 npm run build
+
+# Production sunucusu
+npm run start
+
+# Linting
+npm run lint
+
+# Type checking
+npm run type-check
 ```
 
-Build dosyaları `dist/` klasöründe oluşturulacaktır.
+## 🎯 Kişiselleştirme
 
-## 🚀 Deployment
+### 📝 Kişisel Bilgileri Güncelleme
 
-### Vercel
-
-```bash
-# Vercel CLI ile deploy
-npm i -g vercel
-vercel --prod
+1. **Layout Metadata** (`app/layout.tsx`):
+```tsx
+export const metadata: Metadata = {
+  title: 'Adınız - Portfolio',
+  description: 'Kendi açıklamanız...',
+  // ...diğer metadata
+}
 ```
 
-### Netlify
-
-```bash
-# Build folder: dist
-# Build command: npm run build
+2. **Proje Bilgileri** (`app/components/ProjectsSection.tsx`):
+```tsx
+const projects: Project[] = [
+  {
+    title: 'Proje Adınız',
+    description: 'Proje açıklamanız...',
+    githubUrl: 'https://github.com/kullaniciadi/repo',
+    // ...diğer özellikler
+  }
+]
 ```
 
-## 📱 Responsive Breakpoints
+3. **İletişim Bilgileri** (`app/components/ContactSection.tsx`):
+- Email adresi
+- Sosyal medya linkleri
+- İletişim formu ayarları
 
-- **Mobile**: 320px - 767px
-- **Tablet**: 768px - 1023px
-- **Desktop**: 1024px+
+### 🎨 Tema Özelleştirme
 
-## 🔧 Özelleştirme
-
-### Renkler
-
-`tailwind.config.js` dosyasından renk paletini özelleştirebilirsiniz:
-
+**Renk Paleti** (`tailwind.config.js`):
 ```js
-colors: {
-  primary: {
-    // Özel renk kodları
+theme: {
+  extend: {
+    colors: {
+      // Kendi renk paletinizi ekleyin
+    }
   }
 }
 ```
 
-### Animasyonlar
+**Animasyonlar** (`app/globals.css`):
+```css
+/* Kendi animasyonlarınızı ekleyin */
+@keyframes customAnimation {
+  /* ... */
+}
+```
 
-`src/index.css` dosyasından custom animasyonları düzenleyebilirsiniz.
+## 🌐 Deployment
 
-### İçerik
+### Vercel (Önerilen)
+1. GitHub'a push yapın
+2. [Vercel](https://vercel.com) hesabınızla bağlayın
+3. Otomatik deployment başlayacak
 
-Her bileşen içerisindeki metinleri ve bilgileri kendi verilerinizle değiştirebilirsiniz.
+### Netlify
+1. Repository'yi bağlayın
+2. Build command: `npm run build`
+3. Publish directory: `.next`
 
-## 📄 Lisans
+### Manuel Deployment
+```bash
+npm run build
+npm run start
+```
 
-Bu proje MIT lisansı altında lisanslanmıştır.
+## 📁 Proje Yapısı
+
+```
+modern-portfolio/
+├── app/                    # Next.js App Router
+│   ├── components/         # React componentleri
+│   │   ├── HeroSection.tsx
+│   │   ├── ProjectsSection.tsx
+│   │   └── ...
+│   ├── utils/             # Utility fonksiyonları
+│   ├── globals.css        # Global stiller
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Ana sayfa
+├── public/                # Statik dosyalar
+├── next.config.js         # Next.js konfigürasyonu
+├── tailwind.config.js     # Tailwind konfigürasyonu
+└── package.json          # Proje bağımlılıkları
+```
+
+## 🎨 Component Örnekleri
+
+### Glass Effect Card
+```tsx
+<div className="glass-effect particle-card particle-magnetic">
+  <h3 className="gradient-text">Başlık</h3>
+  <p>İçerik...</p>
+</div>
+```
+
+### Partikül Interactive Element
+```tsx
+<button className="particle-button particle-magnetic">
+  Tıkla
+</button>
+```
 
 ## 🤝 Katkıda Bulunma
 
-1. Fork edin
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Commit edin (`git commit -m 'Add amazing feature'`)
-4. Push edin (`git push origin feature/amazing-feature`)
+1. Fork yapın
+2. Feature branch oluşturun (`git checkout -b feature/yeni-ozellik`)
+3. Commit yapın (`git commit -am 'Yeni özellik eklendi'`)
+4. Push yapın (`git push origin feature/yeni-ozellik`)
 5. Pull Request oluşturun
+
+## 📱 Browser Desteği
+
+- ✅ Chrome 90+
+- ✅ Firefox 90+
+- ✅ Safari 14+
+- ✅ Edge 90+
+
+## 🐛 Bilinen Sorunlar
+
+- Safari'de partikül sisteminde performans sorunları olabilir
+- iOS Safari'de backdrop-filter desteği sınırlı
+
+## 📄 Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+
+## 🙏 Teşekkürler
+
+- [Next.js](https://nextjs.org/) - React framework
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+- [Framer Motion](https://www.framer.com/motion/) - Animasyon kütüphanesi
+- [Lucide](https://lucide.dev/) - İkon seti
+- [Unsplash](https://unsplash.com/) - Görseller
 
 ## 📞 İletişim
 
-- **Email**: ahmet@developer.com
-- **GitHub**: [@ahmetdeveloper](https://github.com/ahmetdeveloper)
-- **LinkedIn**: [Ahmet Developer](https://linkedin.com/in/ahmetdeveloper)
+**Ahmet Mert Şengöl**
+- GitHub: [@ahmertsengol](https://github.com/ahmertsengol)
+- LinkedIn: [ahmertsengol](https://linkedin.com/in/ahmertsengol)
+- Kaggle: [ahmetmertengl](https://www.kaggle.com/ahmetmertengl)
+- LeetCode: [Lazzaran](https://leetcode.com/u/Lazzaran/)
 
 ---
 

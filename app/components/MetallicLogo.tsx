@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import MetallicPaint from './MetallicPaint';
 import { parseLogoImage } from '../utils/parseLogoImage';
+import { logger } from '../utils/logger';
 
 const MetallicLogo: React.FC = () => {
   const [imageData, setImageData] = useState<ImageData | null>(null);
@@ -34,7 +35,7 @@ const MetallicLogo: React.FC = () => {
         setImageData(parsedData?.imageData ?? null);
 
       } catch (err) {
-        console.error("Error creating logo image:", err);
+        logger.error("Error creating logo image:", err);
       }
     }
 

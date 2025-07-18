@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, User, Code, Briefcase, Mail } from 'lucide-react';
 
@@ -7,13 +7,13 @@ const ModernNavbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'home', label: 'Ana Sayfa', icon: Home, href: '#home' },
     { id: 'about', label: 'Hakkımda', icon: User, href: '#about' },
     { id: 'skills', label: 'Yetenekler', icon: Code, href: '#skills' },
     { id: 'projects', label: 'Projeler', icon: Briefcase, href: '#projects' },
     { id: 'contact', label: 'İletişim', icon: Mail, href: '#contact' },
-  ];
+  ], []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +42,7 @@ const ModernNavbar: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', handleSectionInView);
     };
-  }, []);
+  }, [navItems]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -71,6 +71,14 @@ const ModernNavbar: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               className="text-xl font-bold gradient-text cursor-pointer"
               onClick={() => scrollToSection('#home')}
+              role="button"
+              tabIndex={0}
+              aria-label="Ana sayfaya git"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  scrollToSection('#home');
+                }
+              }}
             >
               Ahmet Developer
             </motion.div>
@@ -88,6 +96,8 @@ const ModernNavbar: React.FC = () => {
                   }`}
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`${item.label} bölümüne git`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
                 >
                   <span className="flex items-center space-x-2">
                     <item.icon size={16} />
@@ -120,8 +130,11 @@ const ModernNavbar: React.FC = () => {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 text-gray-300 hover:text-white transition-colors"
                 whileTap={{ scale: 0.95 }}
+                aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-menu"
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
               </motion.button>
             </div>
           </div>
@@ -143,11 +156,14 @@ const ModernNavbar: React.FC = () => {
             
             {/* Mobile Menu */}
             <motion.div
+              id="mobile-menu"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="fixed top-0 right-0 h-full w-80 bg-slate-950/95 backdrop-blur-xl border-l border-white/10 z-50 md:hidden"
+              role="navigation"
+              aria-label="Ana navigasyon menüsü"
             >
               <div className="flex flex-col h-full pt-20 px-6">
                 {/* Mobile Menu Items */}
@@ -165,8 +181,10 @@ const ModernNavbar: React.FC = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                       whileTap={{ scale: 0.95 }}
+                      aria-label={`${item.label} bölümüne git`}
+                      aria-current={activeSection === item.id ? 'page' : undefined}
                     >
-                      <item.icon size={20} />
+                      <item.icon size={20} aria-hidden="true" />
                       <span className="font-medium">{item.label}</span>
                     </motion.button>
                   ))}
