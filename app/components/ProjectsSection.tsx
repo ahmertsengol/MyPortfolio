@@ -163,7 +163,7 @@ const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative py-24 px-6 particle-interactive">
+    <section id="projects" className="relative py-16 sm:py-24 px-4 sm:px-6 particle-interactive">
       {/* Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -190,29 +190,29 @@ const ProjectsSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20 particle-header"
+          className="text-center mb-12 sm:mb-20 particle-header"
         >
           <motion.div 
-            className="flex items-center justify-center gap-3 mb-6"
+            className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <motion.div
-              className="p-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 particle-interactive"
+              className="p-2 sm:p-3 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 particle-interactive"
               whileHover={{ rotate: 180, scale: 1.1 }}
               transition={{ duration: 0.6 }}
             >
-              <Code2 className="w-8 h-8 text-blue-400" />
+              <Code2 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
             </motion.div>
             <motion.h2 
-              className="text-4xl md:text-6xl font-bold particle-text"
+              className="text-2xl sm:text-4xl md:text-6xl font-bold particle-text"
               whileHover={{ scale: 1.02 }}
             >
               <span className="gradient-text">Projelerim</span>
             </motion.h2>
           </motion.div>
           <motion.p 
-            className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-2"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -248,7 +248,7 @@ const ProjectsSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-12 sm:mb-20"
         >
           {[
             { label: 'Toplam Proje', value: projects.length, icon: Layers, color: 'from-blue-500 to-cyan-500', growth: '+6' },
@@ -260,12 +260,12 @@ const ProjectsSection: React.FC = () => {
             return (
               <motion.div
                 key={idx}
-                className="group text-center p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-500"
+                className="group text-center p-3 sm:p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-500"
                 whileHover={{ scale: 1.05, y: -8 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <motion.div 
-                  className={`relative w-16 h-16 rounded-xl bg-gradient-to-br ${stat.color} p-3 mx-auto mb-4 particle-interactive overflow-hidden`}
+                  className={`relative w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${stat.color} p-2 sm:p-3 mx-auto mb-3 sm:mb-4 particle-interactive overflow-hidden`}
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.8 }}
                 >
@@ -273,19 +273,16 @@ const ProjectsSection: React.FC = () => {
                   {/* Particle trail effect */}
                   <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                    animate={{
-                      background: [
-                        'radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
-                        'radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
-                        'radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)'
-                      ]
+                    style={{
+                      background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)'
                     }}
+                    animate={{ opacity: [0, 1, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
                 </motion.div>
 
                 <motion.div 
-                  className="text-3xl font-bold text-white mb-2"
+                  className="text-xl sm:text-3xl font-bold text-white mb-1 sm:mb-2"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.5 + idx * 0.1, type: "spring" }}
@@ -293,7 +290,7 @@ const ProjectsSection: React.FC = () => {
                   {stat.value}
                 </motion.div>
                 
-                <div className="text-sm text-gray-400 mb-2">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-gray-400 mb-1 sm:mb-2">{stat.label}</div>
                 
                 {/* Growth indicator */}
                 <motion.div 
@@ -315,7 +312,7 @@ const ProjectsSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 sm:mb-16 px-2"
         >
           {categories.map((category) => {
             const Icon = category.icon;
@@ -325,7 +322,7 @@ const ProjectsSection: React.FC = () => {
               <motion.button
                 key={category.value}
                 onClick={() => setActiveCategory(category.value)}
-                className={`group relative px-8 py-4 rounded-2xl font-medium transition-all duration-500 particle-button particle-interactive ${
+                className={`group relative px-4 sm:px-8 py-3 sm:py-4 rounded-2xl font-medium transition-all duration-500 particle-button particle-interactive min-h-[48px] ${
                   isActive
                     ? 'text-white glass-effect border-blue-500/50 particle-magnetic scale-105'
                     : 'text-gray-400 hover:text-white glass-effect hover:border-white/30'
@@ -336,9 +333,9 @@ const ProjectsSection: React.FC = () => {
                 aria-selected={isActive}
                 role="tab"
               >
-                <span className="flex items-center gap-3 relative z-10">
+                <span className="flex items-center gap-2 sm:gap-3 relative z-10 text-sm sm:text-base">
                   <motion.div 
-                    className={`p-2 rounded-lg bg-gradient-to-r ${category.color} transition-all duration-300`}
+                    className={`p-1.5 sm:p-2 rounded-lg bg-gradient-to-r ${category.color} transition-all duration-300`}
                     animate={{ 
                       scale: isActive ? 1.1 : 1,
                       rotate: isActive ? 360 : 0
@@ -346,9 +343,10 @@ const ProjectsSection: React.FC = () => {
                     whileHover={{ rotate: 180, scale: 1.2 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <Icon size={18} className="text-white" />
+                    <Icon size={16} className="sm:size-[18px] text-white" />
                   </motion.div>
-                  {category.name}
+                  <span className="hidden sm:inline">{category.name}</span>
+                  <span className="sm:hidden">{category.name.split(' ')[0]}</span>
                 </span>
                 
                 {/* Enhanced active indicator */}
@@ -396,7 +394,7 @@ const ProjectsSection: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 mb-12 sm:mb-20"
           >
             {filteredProjects.map((project) => (
               <motion.div
@@ -624,19 +622,17 @@ const ProjectsSection: React.FC = () => {
                   </motion.div>
 
                   {/* Enhanced particle trail effect */}
-                  <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    animate={{
-                      background: hoveredProject === project.id 
-                        ? [
-                            'radial-gradient(circle at 25% 75%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)',
-                            'radial-gradient(circle at 75% 25%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)',
-                            'radial-gradient(circle at 25% 75%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)'
-                          ]
-                        : 'transparent'
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  />
+                  {hoveredProject === project.id && (
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%)'
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: [0, 1, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    />
+                  )}
                 </div>
               </motion.div>
             ))}

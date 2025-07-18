@@ -172,6 +172,8 @@ const SkillsSection: React.FC = () => {
 
   // Counter animation for achievement stats
   useEffect(() => {
+    const timers: NodeJS.Timeout[] = [];
+    
     if (isInView) {
       achievementStats.forEach((stat, index) => {
         let start = 0;
@@ -191,27 +193,34 @@ const SkillsSection: React.FC = () => {
             return newCounters;
           });
         }, 16);
+        
+        timers.push(timer);
       });
     }
+    
+    // Cleanup function to clear all timers
+    return () => {
+      timers.forEach(timer => clearInterval(timer));
+    };
   }, [isInView]);
 
   return (
-    <section id="skills" className="relative py-20 px-6 particle-interactive">
+    <section id="skills" className="relative py-16 sm:py-20 px-4 sm:px-6 particle-interactive">
       <div ref={ref} className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 particle-header"
+          className="text-center mb-12 sm:mb-16 particle-header"
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6 particle-text"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 particle-text"
             whileHover={{ scale: 1.02 }}
           >
             <span className="gradient-text">Yeteneklerim</span>
           </motion.h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
             Modern teknolojiler ve araçlarla geliştirme sürecindeki uzmanlık alanlarım. 
             Her teknolojide sürekli kendimi geliştirmeye devam ediyorum.
           </p>
@@ -222,33 +231,33 @@ const SkillsSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-12 sm:mb-16"
         >
           {achievementStats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
               <motion.div
                 key={idx}
-                className="text-center p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-300"
+                className="text-center p-3 sm:p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <motion.div 
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} p-2.5 mx-auto mb-3 particle-interactive`}
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${stat.color} p-2 sm:p-2.5 mx-auto mb-2 sm:mb-3 particle-interactive`}
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
                   <Icon className="w-full h-full text-white" />
                 </motion.div>
                 <motion.div 
-                  className="text-3xl font-bold text-white mb-2"
+                  className="text-xl sm:text-3xl font-bold text-white mb-1 sm:mb-2"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.5 + idx * 0.1, type: "spring" }}
                 >
                   {counters[idx]}+
                 </motion.div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
+                <div className="text-xs sm:text-sm text-gray-400">{stat.label}</div>
               </motion.div>
             );
           })}
@@ -259,7 +268,7 @@ const SkillsSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col lg:flex-row gap-6 mb-16"
+          className="flex flex-col lg:flex-row gap-3 sm:gap-6 mb-12 sm:mb-16"
         >
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
@@ -268,7 +277,7 @@ const SkillsSection: React.FC = () => {
             return (
               <motion.div
                 key={category.title}
-                className={`flex-1 p-6 rounded-2xl cursor-pointer transition-all duration-500 particle-card particle-magnetic ${
+                className={`flex-1 p-4 sm:p-6 rounded-2xl cursor-pointer transition-all duration-500 particle-card particle-magnetic min-h-[100px] ${
                   isActive 
                     ? 'glass-effect border-2 border-blue-500/50' 
                     : 'glass-effect hover:border-white/30'
@@ -286,22 +295,22 @@ const SkillsSection: React.FC = () => {
                   }
                 }}
               >
-                <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <motion.div 
-                    className={`p-3 rounded-xl bg-gradient-to-br ${category.color} transition-transform duration-300 particle-interactive`}
+                    className={`p-2 sm:p-3 rounded-xl bg-gradient-to-br ${category.color} transition-transform duration-300 particle-interactive`}
                     animate={{ scale: isActive ? 1.1 : 1 }}
                     whileHover={{ rotate: 180 }}
                   >
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </motion.div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <motion.h3 
-                      className={`text-lg font-bold transition-colors duration-300 particle-text ${isActive ? 'text-white' : 'text-gray-300'}`}
+                      className={`text-base sm:text-lg font-bold transition-colors duration-300 particle-text ${isActive ? 'text-white' : 'text-gray-300'} truncate`}
                       whileHover={{ scale: 1.02 }}
                     >
                       {category.title}
                     </motion.h3>
-                    <p className="text-sm text-gray-400">{category.subtitle}</p>
+                    <p className="text-xs sm:text-sm text-gray-400 truncate">{category.subtitle}</p>
                   </div>
                 </div>
                 
@@ -348,7 +357,7 @@ const SkillsSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-12 sm:mb-16"
         >
           {skillCategories[activeCategory].skills.map((skill, index) => {
             const Icon = skill.icon;
@@ -360,7 +369,7 @@ const SkillsSection: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 group particle-card particle-magnetic"
+                className="relative p-4 sm:p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 group particle-card particle-magnetic"
                 onMouseEnter={() => setHoveredSkill(skill.name)}
                 onMouseLeave={() => setHoveredSkill(null)}
                 whileHover={{ y: -5, scale: 1.02 }}
@@ -373,48 +382,46 @@ const SkillsSection: React.FC = () => {
                 />
                 
                 {/* Particle trail effect */}
-                <motion.div
-                  className="absolute inset-0 pointer-events-none"
-                  animate={{
-                    background: isHovered 
-                      ? [
-                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-                          'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
-                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
-                        ]
-                      : 'transparent'
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
+                {isHovered && (
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                )}
                 
                 <div className="relative z-10">
                   {/* Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-4">
+                  <div className="flex items-start justify-between mb-4 sm:mb-6">
+                    <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                       <motion.div 
-                        className={`p-3 rounded-xl bg-gradient-to-br ${skill.color} particle-interactive transition-transform duration-300`}
+                        className={`p-2 sm:p-3 rounded-xl bg-gradient-to-br ${skill.color} particle-interactive transition-transform duration-300 flex-shrink-0`}
                         whileHover={{ scale: 1.1, rotate: 360 }}
                         transition={{ duration: 0.6 }}
                       >
-                        <Icon className="w-6 h-6 text-white" />
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </motion.div>
-                      <div>
+                      <div className="flex-1 min-w-0">
                         <motion.h3 
-                          className="text-xl font-bold text-white group-hover:gradient-text transition-all duration-300 particle-text"
+                          className="text-lg sm:text-xl font-bold text-white group-hover:gradient-text transition-all duration-300 particle-text truncate"
                           whileHover={{ scale: 1.02 }}
                         >
                           {skill.name}
                         </motion.h3>
-                        <p className="text-sm text-gray-400">{skill.experience}</p>
+                        <p className="text-xs sm:text-sm text-gray-400">{skill.experience}</p>
                       </div>
                     </div>
                     
                     {/* Skill Level Badge */}
                     <motion.div 
-                      className={`px-3 py-1 rounded-full bg-gradient-to-r ${skill.color} bg-opacity-20 border border-current border-opacity-30 particle-interactive`}
+                      className={`px-2 sm:px-3 py-1 rounded-full bg-gradient-to-r ${skill.color} bg-opacity-20 border border-current border-opacity-30 particle-interactive flex-shrink-0`}
                       whileHover={{ scale: 1.05 }}
                     >
-                      <span className="text-sm font-bold text-white">{skill.level}%</span>
+                      <span className="text-xs sm:text-sm font-bold text-white">{skill.level}%</span>
                     </motion.div>
                   </div>
 

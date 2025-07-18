@@ -298,4 +298,77 @@
 .particle-ripple:hover::before {
   width: 300px;
   height: 300px;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  .particle-button,
+  button,
+  a[role="button"],
+  input,
+  textarea,
+  select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce excessive animations on mobile */
+  .particle-magnetic:hover {
+    filter: brightness(1.1) saturate(1.05);
+  }
+  
+  .particle-ripple:hover::before {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Improve text legibility */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Better focus styles for mobile */
+  *:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Optimize glass effects for mobile performance */
+  .glass-effect {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .particle-ripple::before {
+    transition: none;
+  }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+  .glass-effect {
+    background: rgba(15, 23, 42, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .gradient-text {
+    background: none;
+    color: #ffffff;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
 } 

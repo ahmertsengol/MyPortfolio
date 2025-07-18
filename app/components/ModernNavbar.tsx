@@ -128,13 +128,19 @@ const ModernNavbar: React.FC = () => {
             <div className="md:hidden">
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-gray-300 hover:text-white transition-colors"
+                className="p-3 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/10 min-h-[44px] min-w-[44px] flex items-center justify-center"
                 whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
                 aria-label={isMobileMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+                </motion.div>
               </motion.button>
             </div>
           </div>
@@ -161,31 +167,32 @@ const ModernNavbar: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-80 bg-slate-950/95 backdrop-blur-xl border-l border-white/10 z-50 md:hidden"
+              className="fixed top-0 right-0 h-full w-80 max-w-[calc(100vw-2rem)] bg-slate-950/95 backdrop-blur-xl border-l border-white/10 z-50 md:hidden"
               role="navigation"
               aria-label="Ana navigasyon menüsü"
             >
-              <div className="flex flex-col h-full pt-20 px-6">
+              <div className="flex flex-col h-full pt-20 px-4 sm:px-6">
                 {/* Mobile Menu Items */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {navItems.map((item, index) => (
                     <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.href)}
-                      className={`w-full flex items-center space-x-4 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
+                      className={`w-full flex items-center space-x-4 px-5 py-4 rounded-xl text-left transition-all duration-300 min-h-[56px] ${
                         activeSection === item.id
-                          ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                          ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30 shadow-lg shadow-blue-500/10'
+                          : 'text-gray-300 hover:text-white hover:bg-white/10 active:bg-white/15'
                       }`}
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ x: 4 }}
                       aria-label={`${item.label} bölümüne git`}
                       aria-current={activeSection === item.id ? 'page' : undefined}
                     >
-                      <item.icon size={20} aria-hidden="true" />
-                      <span className="font-medium">{item.label}</span>
+                      <item.icon size={22} aria-hidden="true" />
+                      <span className="font-medium text-base">{item.label}</span>
                     </motion.button>
                   ))}
                 </div>

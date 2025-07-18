@@ -132,22 +132,22 @@ const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 px-6 particle-interactive">
+    <section id="contact" className="relative py-16 sm:py-20 px-4 sm:px-6 particle-interactive">
       <div ref={ref} className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 particle-header"
+          className="text-center mb-12 sm:mb-16 particle-header"
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6 particle-text"
+            className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 particle-text"
             whileHover={{ scale: 1.02 }}
           >
             <span className="gradient-text">İletişime Geçin</span>
           </motion.h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
             Yeni projelerde iş birliği yapmaya her zaman açığım. Fikirlerinizi paylaşın, 
             birlikte harika şeyler yapalım.
           </p>
@@ -158,7 +158,7 @@ const ContactSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16"
         >
           {contactInfo.map((info, index) => {
             const Icon = info.icon;
@@ -166,7 +166,7 @@ const ContactSection: React.FC = () => {
             return (
               <motion.div
                 key={info.title}
-                className="text-center p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-300 group"
+                className="text-center p-4 sm:p-6 rounded-2xl glass-effect particle-card particle-magnetic particle-ripple hover:border-white/30 transition-all duration-300 group"
                 onMouseEnter={() => setHoveredContact(info.title)}
                 onMouseLeave={() => setHoveredContact(null)}
                 whileHover={{ scale: 1.05, y: -5 }}
@@ -176,29 +176,27 @@ const ContactSection: React.FC = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Particle trail effect */}
-                <motion.div
-                  className="absolute inset-0 pointer-events-none"
-                  animate={{
-                    background: isHovered 
-                      ? [
-                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-                          'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
-                          'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
-                        ]
-                      : 'transparent'
-                  }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                />
+                {isHovered && (
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                )}
 
                 <motion.div 
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${info.color} p-2.5 mx-auto mb-4 particle-interactive transition-transform duration-300`}
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${info.color} p-2 sm:p-2.5 mx-auto mb-3 sm:mb-4 particle-interactive transition-transform duration-300`}
                   whileHover={{ scale: 1.1, rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
                   <Icon className="w-full h-full text-white" />
                 </motion.div>
                 <motion.h3 
-                  className="text-lg font-bold text-white mb-2 particle-text"
+                  className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2 particle-text"
                   whileHover={{ scale: 1.02 }}
                 >
                   {info.title}
@@ -229,7 +227,7 @@ const ContactSection: React.FC = () => {
           })}
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -238,19 +236,19 @@ const ContactSection: React.FC = () => {
             className="lg:col-span-3"
           >
             <motion.div 
-              className="p-8 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+              className="p-4 sm:p-8 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
               whileHover={{ scale: 1.01, y: -3 }}
             >
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <motion.div 
-                  className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 particle-interactive"
+                  className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 particle-interactive"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <MessageSquare className="w-6 h-6 text-white" />
+                  <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </motion.div>
                 <motion.h3 
-                  className="text-2xl font-bold text-white particle-text"
+                  className="text-lg sm:text-2xl font-bold text-white particle-text"
                   whileHover={{ scale: 1.02 }}
                 >
                   Mesaj Gönderin
@@ -275,8 +273,8 @@ const ContactSection: React.FC = () => {
                 </motion.div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -284,7 +282,7 @@ const ContactSection: React.FC = () => {
                     className="relative group"
                   >
                     <motion.label 
-                      className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-3 particle-interactive"
+                      className="flex items-center gap-2 text-gray-300 text-sm font-medium mb-2 sm:mb-3 particle-interactive"
                       whileHover={{ x: 3 }}
                     >
                       <User size={16} />
@@ -297,7 +295,7 @@ const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600"
+                      className="w-full px-4 py-3 sm:py-3 glass-effect text-white placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 particle-form group-hover:border-gray-600 min-h-[48px] text-base"
                       placeholder="Adınızı girin"
                       whileFocus={{ scale: 1.02 }}
                       aria-describedby="name-description"
@@ -393,7 +391,7 @@ const ContactSection: React.FC = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold transition-all duration-300 particle-button particle-magnetic ${
+                  className={`w-full flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 particle-button particle-magnetic min-h-[48px] text-sm sm:text-base ${
                     isSubmitting
                       ? 'bg-gray-600 cursor-not-allowed'
                       : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25'
@@ -431,23 +429,23 @@ const ContactSection: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-2 space-y-4 sm:space-y-6"
           >
             {/* Social Links */}
             <motion.div 
-              className="p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
+              className="p-4 sm:p-6 rounded-2xl glass-effect hover:border-white/30 transition-all duration-300 particle-card particle-ripple"
               whileHover={{ scale: 1.02, y: -3 }}
             >
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <motion.div 
-                  className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 particle-interactive"
+                  className="p-2 sm:p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 particle-interactive"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <Sparkles className="w-6 h-6 text-white" />
+                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </motion.div>
                 <motion.h3 
-                  className="text-xl font-bold text-white particle-text"
+                  className="text-lg sm:text-xl font-bold text-white particle-text"
                   whileHover={{ scale: 1.02 }}
                 >
                   Sosyal Medya
@@ -474,19 +472,17 @@ const ContactSection: React.FC = () => {
                       transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                     >
                       {/* Particle trail effect */}
-                      <motion.div
-                        className="absolute inset-0 pointer-events-none"
-                        animate={{
-                          background: isHovered 
-                            ? [
-                                'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)',
-                                'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)',
-                                'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)'
-                              ]
-                            : 'transparent'
-                        }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      />
+                      {hoveredSocial === social.name && (
+                        <motion.div
+                          className="absolute inset-0 pointer-events-none"
+                          style={{
+                            background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 50%)'
+                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: [0, 1, 0] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                      )}
 
                       <motion.div 
                         className={`p-3 rounded-lg bg-gradient-to-r ${social.color} text-white particle-interactive transition-transform duration-300`}

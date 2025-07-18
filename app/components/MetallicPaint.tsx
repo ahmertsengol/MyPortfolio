@@ -201,15 +201,30 @@ export default function MetallicPaint({
   >({});
   const totalAnimationTime = useRef(0);
   const lastRenderTime = useRef(0);
+  const isMountedRef = useRef(true);
 
   const updateUniforms = useCallback(() => {
-    if (!gl || !uniforms) return;
-    gl.uniform1f(uniforms.u_edge, params.edge);
-    gl.uniform1f(uniforms.u_patternBlur, params.patternBlur);
-    gl.uniform1f(uniforms.u_time, 0);
-    gl.uniform1f(uniforms.u_patternScale, params.patternScale);
-    gl.uniform1f(uniforms.u_refraction, params.refraction);
-    gl.uniform1f(uniforms.u_liquid, params.liquid);
+    if (!gl || !uniforms || !isMountedRef.current) return;
+    
+    // Check if all required uniforms exist before using them
+    const requiredUniforms = ['u_edge', 'u_patternBlur', 'u_time', 'u_patternScale', 'u_refraction', 'u_liquid'];
+    const missingUniforms = requiredUniforms.filter(name => !uniforms[name]);
+    
+    if (missingUniforms.length > 0) {
+      logger.error('Missing WebGL uniforms:', missingUniforms);
+      return;
+    }
+
+    try {
+      gl.uniform1f(uniforms.u_edge, params.edge);
+      gl.uniform1f(uniforms.u_patternBlur, params.patternBlur);
+      gl.uniform1f(uniforms.u_time, 0);
+      gl.uniform1f(uniforms.u_patternScale, params.patternScale);
+      gl.uniform1f(uniforms.u_refraction, params.refraction);
+      gl.uniform1f(uniforms.u_liquid, params.liquid);
+    } catch (error) {
+      logger.error('WebGL uniform update error:', error);
+    }
   }, [gl, uniforms, params]);
 
   useEffect(() => {
@@ -289,7 +304,9 @@ export default function MetallicPaint({
         return uniforms;
       }
       const uniforms = getUniforms(program, gl);
-      setUniforms(uniforms);
+      if (isMountedRef.current) {
+        setUniforms(uniforms);
+      }
 
       const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
       const vertexBuffer = gl.createBuffer();
@@ -304,7 +321,9 @@ export default function MetallicPaint({
       gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
       gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-      setGl(gl);
+      if (isMountedRef.current) {
+        setGl(gl);
+      }
     }
 
     initShader();
@@ -366,7 +385,13 @@ export default function MetallicPaint({
   }, [gl, uniforms, imageData]);
 
   useEffect(() => {
-    if (!gl || !uniforms) return;
+    if (!gl || !uniforms || !isMountedRef.current) return;
+    
+    // Check if required uniform exists
+    if (!uniforms.u_image_texture) {
+      logger.error('Missing u_image_texture uniform');
+      return;
+    }
 
     const existingTexture = gl.getParameter(gl.TEXTURE_BINDING_2D);
     if (existingTexture) {
@@ -374,17 +399,22 @@ export default function MetallicPaint({
     }
 
     const imageTexture = gl.createTexture();
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, imageTexture);
-
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-
-    gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+    if (!imageTexture) {
+      logger.error('Failed to create WebGL texture');
+      return;
+    }
 
     try {
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, imageTexture);
+
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+      gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+
       gl.texImage2D(
         gl.TEXTURE_2D,
         0,
@@ -397,7 +427,10 @@ export default function MetallicPaint({
         imageData?.data
       );
 
-      gl.uniform1i(uniforms.u_image_texture, 0);
+      // Only set uniform if component is still mounted
+      if (isMountedRef.current) {
+        gl.uniform1i(uniforms.u_image_texture, 0);
+      }
     } catch (e) {
       logger.error("Error uploading texture:", e);
     }
@@ -408,6 +441,13 @@ export default function MetallicPaint({
       }
     };
   }, [gl, uniforms, imageData]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   return <canvas ref={canvasRef} className="paint-container" />;
 } 

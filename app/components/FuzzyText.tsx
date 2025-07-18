@@ -17,6 +17,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   const [displayText, setDisplayText] = useState(text);
   const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isMountedRef = useRef(true);
 
   const getRandomChar = () => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
@@ -24,7 +25,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   };
 
   const animateText = useCallback(() => {
-    if (isAnimating) return;
+    if (isAnimating || !isMountedRef.current) return;
     
     setIsAnimating(true);
     const originalText = text;
@@ -32,6 +33,11 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     let iteration = 0;
 
     intervalRef.current = setInterval(() => {
+      if (!isMountedRef.current) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        return;
+      }
+      
       setDisplayText(
         textArray
           .map((char, index) => {
@@ -45,8 +51,10 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       if (iteration >= originalText.length) {
         if (intervalRef.current) clearInterval(intervalRef.current);
-        setDisplayText(originalText);
-        setIsAnimating(false);
+        if (isMountedRef.current) {
+          setDisplayText(originalText);
+          setIsAnimating(false);
+        }
       }
 
       iteration += 1 / 3;
@@ -62,6 +70,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
   useEffect(() => {
     return () => {
+      isMountedRef.current = false;
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }

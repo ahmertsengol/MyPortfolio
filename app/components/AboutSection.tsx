@@ -96,6 +96,8 @@ const AboutSection: React.FC = () => {
   const [counters, setCounters] = useState(stats.map(() => 0));
 
   useEffect(() => {
+    const timers: NodeJS.Timeout[] = [];
+    
     if (isInView) {
       stats.forEach((stat, index) => {
         let start = 0;
@@ -115,8 +117,15 @@ const AboutSection: React.FC = () => {
             return newCounters;
           });
         }, 16);
+        
+        timers.push(timer);
       });
     }
+    
+    // Cleanup function to clear all timers
+    return () => {
+      timers.forEach(timer => clearInterval(timer));
+    };
   }, [isInView, stats]);
 
   return (
@@ -332,19 +341,17 @@ const AboutSection: React.FC = () => {
                     />
 
                     {/* Particle trail effect */}
-                    <motion.div
-                      className="absolute inset-0 pointer-events-none"
-                      animate={{
-                        background: isHovered 
-                          ? [
-                              'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)',
-                              'radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
-                              'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
-                            ]
-                          : 'transparent'
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    />
+                    {isHovered && (
+                      <motion.div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)'
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    )}
                     
                     {/* Icon */}
                     <div className="relative z-10">

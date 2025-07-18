@@ -6,12 +6,16 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
-  display: 'swap',
+  display: 'optional', // Don't block render waiting for font
+  preload: false,
+  fallback: ['Consolas', 'Monaco', 'monospace'],
 })
 
 export const metadata: Metadata = {
@@ -67,10 +71,12 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#0f172a' }
   ],
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
