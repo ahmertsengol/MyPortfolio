@@ -12,11 +12,11 @@ const AboutSection: React.FC = () => {
 
   const personalInfo = {
     name: "Ahmet Mert Şengöl",
-    title: "Full Stack Developer",
-    location: "Istanbul, Turkey",
-    email: "hello@ahmetdev.com",
+    title: "Full Stack Developer and AI Enthusiast",
+    location: "Muğla/Milas, Turkey",
+    email: "21sandn21@gmail.com",
     experience: "3+ Yıl Deneyim",
-    projects: "25+ Proje"
+    projects: "20+ Proje"
   };
 
   const values = [
@@ -57,37 +57,23 @@ const AboutSection: React.FC = () => {
   const timeline = [
     {
       year: "2024",
-      title: "Senior Full Stack Developer",
-      company: "Tech Startup",
-      description: "Modern web teknolojileri ile scalable aplikasyonlar geliştirme",
+      title: "Full Stack Developer",
+      company: "Freelance Projeler",
+      description: "Modern web teknolojileri ve AI entegrasyonları ile projeler geliştirme",
       type: "work"
     },
     {
       year: "2023",
-      title: "Freelance Developer",
-      company: "Çeşitli Projeler",
+      title: "Student Developer",
+      company: "Fırat University",
       description: "E-ticaret, fintech ve SaaS projelerinde uzmanlaşma",
       type: "work"
-    },
-    {
-      year: "2022",
-      title: "Full Stack Developer",
-      company: "Digital Agency",
-      description: "React, Node.js ve modern frontend framework'leri ile proje geliştirme",
-      type: "work"
-    },
-    {
-      year: "2021",
-      title: "Computer Engineering",
-      company: "Üniversite Mezunu",
-      description: "Yazılım mühendisliği ve algoritma tasarımı konularında derinleşme",
-      type: "education"
     }
   ];
 
   const stats = useMemo(() => [
-    { label: "Tamamlanan Proje", value: 25, icon: Trophy, color: "from-blue-500 to-cyan-500" },
-    { label: "Mutlu Müşteri", value: 15, icon: Star, color: "from-purple-500 to-pink-500" },
+    { label: "Tamamlanan Proje", value: 20, icon: Trophy, color: "from-blue-500 to-cyan-500" },
+    { label: "Mutlu Müşteri", value: 12, icon: Star, color: "from-purple-500 to-pink-500" },
     { label: "Kod Satırı", value: 50000, icon: Code2, color: "from-green-500 to-teal-500" },
     { label: "Kahve", value: 1247, icon: Coffee, color: "from-orange-500 to-red-500" }
   ], []);

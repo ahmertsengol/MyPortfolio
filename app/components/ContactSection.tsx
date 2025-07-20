@@ -39,21 +39,21 @@ const contactInfo: ContactInfo[] = [
   {
     icon: Mail,
     title: 'Email',
-    content: 'ahmet@developer.com',
-    link: 'mailto:ahmet@developer.com',
+    content: '21sandn21@gmail.com',
+    link: 'mailto:21sandn21@gmail.com',
     color: 'from-blue-500 to-cyan-500'
   },
   {
     icon: Phone,
     title: 'Telefon',
-    content: '+90 555 123 4567',
+    content: '+90 000 000 0000',
     link: 'tel:+905551234567',
     color: 'from-green-500 to-teal-500'
   },
   {
     icon: MapPin,
     title: 'Konum',
-    content: 'İstanbul, Türkiye',
+    content: 'Muğla/Milas, Türkiye',
     color: 'from-purple-500 to-pink-500'
   },
   {
@@ -68,28 +68,28 @@ const socialLinks: SocialLink[] = [
   {
     icon: Github,
     name: 'GitHub',
-    url: 'https://github.com',
+    url: 'https://github.com/ahmertsengol',
     color: 'from-gray-600 to-gray-800',
     description: 'Kod projelerim ve açık kaynak katkılarım'
   },
   {
     icon: Linkedin,
     name: 'LinkedIn',
-    url: 'https://linkedin.com',
+    url: 'https://www.linkedin.com/in/ahmertsengol/',
     color: 'from-blue-600 to-blue-700',
     description: 'Profesyonel ağım ve kariyer bilgilerim'
   },
   {
     icon: Twitter,
     name: 'Twitter',
-    url: 'https://twitter.com',
+    url: 'https://x.com/ahmertsengol',
     color: 'from-blue-400 to-blue-500',
     description: 'Teknoloji haberleri ve düşüncelerim'
   },
   {
     icon: Instagram,
     name: 'Instagram',
-    url: 'https://instagram.com',
+    url: 'https://www.instagram.com/ahmertsengol/',
     color: 'from-pink-500 to-purple-600',
     description: 'Günlük yaşam ve çalışma ortamım'
   }
