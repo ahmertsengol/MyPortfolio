@@ -15,12 +15,11 @@ export default function Hero() {
           {siteConfig.summary}
         </p>
         <div className="mt-8 flex gap-3">
-          <Button asChild>
-            <a href="#projects">Projeleri Gör</a>
-          </Button>
-          <Button variant="secondary" asChild>
-            <a href={siteConfig.socials.find(s=>s.label==="GitHub")?.href ?? "#"} target="_blank" rel="noreferrer">GitHub</a>
-          </Button>
+          <Button variant="accent" as="a" href="#projects">View Projects</Button>
+          <Button variant="secondary" as="a" href={siteConfig.socials.find(s=>s.label==="GitHub")?.href ?? "#"} target="_blank" rel="noreferrer">GitHub</Button>
+          {siteConfig.socials.find(s=>s.label==="LinkedIn") && (
+            <Button variant="secondary" as="a" href={siteConfig.socials.find(s=>s.label==="LinkedIn")!.href} target="_blank" rel="noreferrer">LinkedIn</Button>
+          )}
         </div>
       </Container>
     </section>

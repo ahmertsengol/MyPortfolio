@@ -37,9 +37,9 @@ export default function Header() {
           Ahmet
         </Link>
         <nav className="flex items-center gap-4 text-sm">
-          <Link href="#projects" className={linkCls("projects")}>Projeler</Link>
-          <Link href="#about" className={linkCls("about")}>Hakkımda</Link>
-          <Link href="#contact" className={linkCls("contact")}>İletişim</Link>
+          <Link href="#projects" className={linkCls("projects")}>Projects</Link>
+          <Link href="#about" className={linkCls("about")}>About</Link>
+          <Link href="#contact" className={linkCls("contact")}>Contact</Link>
         </nav>
       </Container>
     </header>

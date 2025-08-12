@@ -22,3 +22,11 @@ export function IconExternal({ className = "w-4 h-4" }: { className?: string }) 
   );
 }
 
+export function IconSettings({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm9.4 4a7.6 7.6 0 0 0-.15-1.5l2.07-1.61-2-3.46-2.5.8a7.7 7.7 0 0 0-2.6-1.5l-.39-2.6h-4l-.39 2.6a7.7 7.7 0 0 0-2.6 1.5l-2.5-.8-2 3.46 2.07 1.61A7.6 7.6 0 0 0 2.6 12c0 .51.05 1.01.15 1.5L.68 15.1l2 3.46 2.5-.8a7.7 7.7 0 0 0 2.6 1.5l.39 2.6h4l.39-2.6a7.7 7.7 0 0 0 2.6-1.5l2.5.8 2-3.46-2.07-1.61c.1-.49.15-.99.15-1.5Z" />
+    </svg>
+  );
+}
+

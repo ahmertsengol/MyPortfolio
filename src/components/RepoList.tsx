@@ -10,7 +10,7 @@ export default function RepoList({ repos }: Props) {
   return (
     <section id="projects" className="py-12 sm:py-16" aria-labelledby="repos-heading">
       <Container>
-        <h2 id="repos-heading" className="text-xl font-semibold tracking-tight">Öne Çıkan Repositories</h2>
+        <h2 id="repos-heading" className="text-xl font-semibold tracking-tight">Featured Repositories</h2>
         <ul className="mt-6 grid gap-6 sm:grid-cols-2">
           {repos.map((r) => (
             <li key={r.id} className="group rounded-xl border border-white/10 bg-black/30 backdrop-blur p-5 transition-all hover:bg-black/40 hover:-translate-y-0.5">

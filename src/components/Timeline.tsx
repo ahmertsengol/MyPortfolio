@@ -14,11 +14,11 @@ const items: Item[] = [
 
 export default function Timeline() {
   return (
-    <Section id="about" title="Deneyim & Eğitim">
+    <Section id="about" title="Experience & Education">
       <ol className="relative border-l border-white/10 pl-6">
         {items.map((it) => (
           <li key={`${it.title}-${it.period}`} className="mb-8 last:mb-0">
-            <span className="absolute -left-2 top-1.5 h-3 w-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" />
+            <span className="relative mb-8 last:mb-0 after:absolute after:left-[-1.125rem] after:top-3 after:bottom-[-1.5rem] after:w-px after:bg-[var(--accent)] after:opacity-20 last:after:hidden" />
             <h3 className="font-medium">{it.title} {it.org && <span className="text-foreground/70">@ {it.org}</span>}</h3>
             <p className="text-xs text-foreground/60 mt-0.5">{it.period}</p>
             {it.description && <p className="mt-2 text-sm text-foreground/80 leading-relaxed">{it.description}</p>}

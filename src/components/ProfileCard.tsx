@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Container from "@/components/Container";
 import { GithubUser } from "@/lib/github";
+import { siteConfig } from "@/data/site";
 
 type Props = {
   user: GithubUser;
@@ -24,6 +25,16 @@ export default function ProfileCard({ user }: Props) {
               <a href={user.html_url} target="_blank" rel="noreferrer" className="hover:underline">
                 GitHub
               </a>
+              {siteConfig.socials.find((s) => s.label === "LinkedIn") && (
+                <a
+                  href={siteConfig.socials.find((s) => s.label === "LinkedIn")!.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  LinkedIn
+                </a>
+              )}
               {user.blog && (
                 <a href={user.blog} target="_blank" rel="noreferrer" className="hover:underline">
                   Website

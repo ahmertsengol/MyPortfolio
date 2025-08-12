@@ -8,9 +8,31 @@ type BackgroundProps = {
   variant?: BackgroundVariant;
   tint?: string;
   brightness?: number;
+  scale?: number;
+  digitSize?: number;
+  timeScale?: number;
+  noiseAmp?: number;
+  scanlineIntensity?: number;
+  curvature?: number;
+  mouseStrength?: number;
+  mouseReact?: boolean;
+  pageLoadAnimation?: boolean;
 };
 
-export default function Background({ variant = "radial-grid", tint, brightness }: BackgroundProps) {
+export default function Background({
+  variant = "radial-grid",
+  tint,
+  brightness,
+  scale,
+  digitSize,
+  timeScale,
+  noiseAmp,
+  scanlineIntensity,
+  curvature,
+  mouseStrength,
+  mouseReact,
+  pageLoadAnimation,
+}: BackgroundProps) {
   if (variant === "plain") {
     return null;
   }
@@ -21,22 +43,22 @@ export default function Background({ variant = "radial-grid", tint, brightness }
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <FaultyTerminal
           className="w-full h-full"
-          scale={1.2}
+          scale={scale ?? 1.2}
           gridMul={[1.5, 1]}
-          digitSize={1.0}
-          timeScale={0.6}
+          digitSize={digitSize ?? 1.0}
+          timeScale={timeScale ?? 0.6}
           pause={false}
-          scanlineIntensity={0.6}
+          scanlineIntensity={scanlineIntensity ?? 0.6}
           glitchAmount={0.6}
           flickerAmount={0.5}
-          noiseAmp={0.7}
+          noiseAmp={noiseAmp ?? 0.7}
           chromaticAberration={0}
           dither={0}
-          curvature={0}
+          curvature={curvature ?? 0}
           tint={tint ?? "#a3a3a3"}
-          mouseReact={true}
-          mouseStrength={0.35}
-          pageLoadAnimation={false}
+          mouseReact={mouseReact ?? true}
+          mouseStrength={mouseStrength ?? 0.35}
+          pageLoadAnimation={pageLoadAnimation ?? false}
           brightness={brightness ?? 0.35}
         />
         {/* Softer overlays so tint is visible */}

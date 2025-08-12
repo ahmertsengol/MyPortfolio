@@ -10,15 +10,16 @@ export type SiteConfig = {
   summary: string;
   email: string;
   socials: SocialLink[];
+  siteUrl?: string;
 };
 
 export const siteConfig: SiteConfig = {
   name: "Ahmet Mert Şengöl",
   role: "Software Engineering Student · AI Enthusiast",
-  location: "Türkiye / Elazığ",
+  location: "Turkey / Elazığ",
   summary:
-    "Modern web ve yapay zeka projelerine ilgi duyuyorum. Minimalist, performans odaklı, erişilebilir arayüzler geliştiriyorum.",
-  email: "",
+    "I enjoy modern web and AI projects. I build minimalist, performance-first and accessible interfaces.",
+  email: "21sandn21@gmail.com", // TODO: replace with your real email
   socials: [
     { label: "GitHub", href: "https://github.com/ahmertsengol" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/ahmertsengol" },
@@ -26,5 +27,6 @@ export const siteConfig: SiteConfig = {
     { label: "LeetCode", href: "https://leetcode.com/u/Lazzaran/" },
     { label: "HuggingFace", href: "https://huggingface.co/Lazzaran" },
   ],
+  siteUrl: "https://www.ahmertsengol.com",
 };
 
