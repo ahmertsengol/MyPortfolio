@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ahmet | Portfolio",
+  title: "Ahmet Mert Sengöl | Portfolio",
   description: "software engineer portfolio",
   metadataBase: new URL(siteConfig.siteUrl ?? "https://ahmertsengol.com"),
   openGraph: {

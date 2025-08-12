@@ -34,7 +34,7 @@ export default function Header() {
     <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <Container className="flex items-center justify-between h-14 rounded-b-xl border-x border-b border-white/10 bg-black/20">
         <Link href="/" className="font-semibold tracking-tight">
-          Ahmet
+          Ahmet Mert Sengöl
         </Link>
         <nav className="flex items-center gap-4 text-sm">
           <Link href="#projects" className={linkCls("projects")}>Projects</Link>
