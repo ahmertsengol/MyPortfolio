@@ -1,6 +1,5 @@
 import Container from "@/components/Container";
 import { siteConfig } from "@/data/site";
-import ContactForm from "@/components/ContactForm";
 
 export default function Contact() {
   return (
@@ -18,7 +17,6 @@ export default function Contact() {
             Send Email
           </a>
         </div>
-        <ContactForm />
       </Container>
     </section>
   );
