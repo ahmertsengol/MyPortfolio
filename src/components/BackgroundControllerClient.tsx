@@ -4,7 +4,6 @@ import { useState } from "react";
 import Background from "@/components/Background";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BackgroundPicker from "@/components/BackgroundPicker";
 import ControlsLauncher from "@/components/ControlsLauncher";
 
 export default function BackgroundControllerClient({ children }: { children: React.ReactNode }) {
@@ -39,7 +38,7 @@ export default function BackgroundControllerClient({ children }: { children: Rea
       <style>{`:root{--accent:${tint}}`}</style>
       {children}
       <Footer />
-      <BackgroundPicker value={tint} onChange={setTint} brightness={brightness} onBrightnessChange={setBrightness} />
+    
       <ControlsLauncher
         tint={tint}
         onTint={setTint}
