@@ -14,6 +14,9 @@ export default function Hero() {
         <p className="mt-6 max-w-2xl text-foreground/80 leading-relaxed">
           {siteConfig.summary}
         </p>
+        <a href="https://www.buymeacoffee.com/21sandn21q" target="_blank">
+          <img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style={{height: "60px !important", width: "217px !important"}} />
+        </a>
         <div className="mt-8 flex gap-3">
           <Button variant="accent" as="a" href="#projects">View Projects</Button>
           <Button variant="secondary" as="a" href={siteConfig.socials.find(s=>s.label==="GitHub")?.href ?? "#"} target="_blank" rel="noreferrer">GitHub</Button>
