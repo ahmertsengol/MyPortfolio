@@ -16,12 +16,12 @@ export default function About() {
             I enjoy building capable, robust, high-performance web solutions in .NET and Node.js.
           </p>
           <p>
-            I'm actively learning AWS services to improve my cloud computing knowledge. I use Git & GitHub every day
+            I&apos;m actively learning AWS services to improve my cloud computing knowledge. I use Git & GitHub every day
             for collaboration, version control, and project management.
           </p>
           <p>
-            For me, software development is more than just writing code; it's about solving real-world problems,
-            improving user experiences, and constantly learning new things. I'm always looking for ways to push
+            For me, software development is more than just writing code; it&apos;s about solving real-world problems,
+            improving user experiences, and constantly learning new things. I&apos;m always looking for ways to push
             boundaries, integrate AI into projects and stay ahead of industry trends.
           </p>
         </div>

@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import { siteConfig } from "@/data/site";
 import Button from "@/components/ui/Button";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -14,8 +15,8 @@ export default function Hero() {
         <p className="mt-6 max-w-2xl text-foreground/80 leading-relaxed">
           {siteConfig.summary}
         </p>
-        <a href="https://www.buymeacoffee.com/21sandn21q" target="_blank">
-          <img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style={{height: "60px !important", width: "217px !important"}} />
+        <a href="https://www.buymeacoffee.com/21sandn21q" target="_blank" rel="noreferrer">
+          <Image src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width={217} height={60} unoptimized />
         </a>
         <div className="mt-8 flex gap-3">
           <Button variant="accent" as="a" href="#projects">View Projects</Button>
