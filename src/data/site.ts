@@ -15,16 +15,16 @@ export type SiteConfig = {
 
 export const siteConfig: SiteConfig = {
   name: "Ahmet Mert Şengöl",
-  role: "Software Engineering Student · AI Enthusiast",
-  location: "Turkey / Elazığ",
+  role: "Full-stack Developer / AI Learner",
+  location: "Milas, Muğla, Türkiye",
   summary:
-    "I enjoy modern web and AI projects. I build minimalist, performance-first and accessible interfaces.",
-  email: "21sandn21@gmail.com", // TODO: replace with your real email
+    "Full-Stack Developer with a passion for building innovative and smart digital solutions. I have experience working with C#, Java, JavaScript and Python to develop scalable and efficient applications. Currently expanding my expertise in AI-powered web technologies and actively learning AWS services.",
+  email: "21sandn21@gmail.com",
   socials: [
     { label: "GitHub", href: "https://github.com/ahmertsengol" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/ahmertsengol" },
-    { label: "Kaggle", href: "https://www.kaggle.com/ahmetmertengl" },
     { label: "LeetCode", href: "https://leetcode.com/u/Lazzaran/" },
+    { label: "Kaggle", href: "https://www.kaggle.com/ahmetmertengl" },
     { label: "HuggingFace", href: "https://huggingface.co/Lazzaran" },
   ],
   siteUrl: "https://www.ahmertsengol.com",

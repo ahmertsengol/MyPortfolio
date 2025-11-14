@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="py-24 sm:py-28" aria-labelledby="hero-heading">
       <Container>
-        <div className="inline-block rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-foreground/80">Portfolio · {siteConfig.role}</div>
+        <div className="inline-block rounded-full border border-[--button-border] bg-[--button-bg] px-3 py-1 text-xs text-foreground/80">Portfolio · {siteConfig.role}</div>
         <h1 id="hero-heading" className="mt-3 text-4xl sm:text-5xl font-semibold tracking-tight">
           {siteConfig.name}
         </h1>

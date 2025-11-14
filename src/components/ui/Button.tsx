@@ -8,12 +8,12 @@ export type ButtonProps =
 
 function composeClasses(variant: Variant): string {
   if (variant === "primary")
-    return "inline-flex items-center justify-center h-10 px-5 rounded-full text-sm font-medium text-white border border-white/15 bg-white/10 backdrop-blur hover:bg-white/15 shadow-sm";
+    return "inline-flex items-center justify-center h-10 px-5 rounded-full text-sm font-medium text-[--text-primary] border border-[--button-border] bg-[--button-bg] backdrop-blur hover:bg-[--button-hover] shadow-sm";
   if (variant === "secondary")
-    return "inline-flex items-center justify-center h-10 px-5 rounded-full text-sm font-medium text-foreground/90 border border-white/10 hover:bg-white/10";
+    return "inline-flex items-center justify-center h-10 px-5 rounded-full text-sm font-medium text-foreground/90 border border-[--button-border] hover:bg-[--button-hover]";
   if (variant === "accent")
-    return "inline-flex items-center justify-center h-10 px-5 rounded-full text-sm font-medium text-white shadow-sm border border-white/10 bg-[linear-gradient(90deg,var(--accent),color-mix(in_srgb,var(--accent)_60%,#7c3aed))] hover:opacity-95";
-  return "inline-flex items-center justify-center h-10 px-4 rounded-full text-sm font-medium hover:bg-white/10 border border-transparent";
+    return "inline-flex items-center justify-center h-10 px-5 rounded-full text-sm font-medium text-white shadow-sm border border-[--button-border] bg-[linear-gradient(90deg,var(--accent),color-mix(in_srgb,var(--accent)_60%,#7c3aed))] hover:opacity-95";
+  return "inline-flex items-center justify-center h-10 px-4 rounded-full text-sm font-medium hover:bg-[--button-hover] border border-transparent";
 }
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(

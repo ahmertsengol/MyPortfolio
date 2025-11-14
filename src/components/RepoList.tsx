@@ -13,7 +13,7 @@ export default function RepoList({ repos }: Props) {
         <h2 id="repos-heading" className="text-xl font-semibold tracking-tight">Featured Repositories</h2>
         <ul className="mt-6 grid gap-6 sm:grid-cols-2">
           {repos.map((r) => (
-            <li key={r.id} className="group rounded-xl border border-white/10 bg-black/30 backdrop-blur p-5 transition-all hover:bg-black/40 hover:-translate-y-0.5">
+            <li key={r.id} className="group rounded-xl border border-[--card-border] bg-[--card-bg] backdrop-blur p-5 transition-all hover:bg-[--button-hover] hover:-translate-y-0.5">
               <a href={r.html_url} target="_blank" rel="noreferrer" className="block">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="text-base font-medium truncate flex items-center gap-2">
@@ -32,7 +32,7 @@ export default function RepoList({ repos }: Props) {
                   {typeof r.forks_count === "number" && (
                     <span className="inline-flex items-center gap-1"><IconFork /> {r.forks_count}</span>
                   )}
-                  {r.language && <span className="ml-auto rounded-full border border-white/15 bg-white/5 px-2 py-0.5">{r.language}</span>}
+                  {r.language && <span className="ml-auto rounded-full border border-[--button-border] bg-[--button-bg] px-2 py-0.5">{r.language}</span>}
                 </div>
               </a>
             </li>

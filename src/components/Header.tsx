@@ -28,11 +28,11 @@ export default function Header() {
   }, []);
 
   const linkCls = (id: string) =>
-    `hover:opacity-80 transition-opacity ${active === id ? "text-white" : "text-foreground/80"}`;
+    `hover:opacity-80 transition-opacity ${active === id ? "text-foreground" : "text-foreground/80"}`;
 
   return (
     <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <Container className="flex items-center justify-between h-14 rounded-b-xl border-x border-b border-white/10 bg-black/20">
+      <Container className="flex items-center justify-between h-14 rounded-b-xl border-x border-b border-[--glass-border] bg-[--glass-bg]">
         <Link href="/" className="font-semibold tracking-tight">
           Ahmet Mert Sengöl
         </Link>

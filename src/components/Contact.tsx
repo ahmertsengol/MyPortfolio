@@ -3,7 +3,7 @@ import { siteConfig } from "@/data/site";
 
 export default function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="py-12 sm:py-16 border-t border-black/[.08] dark:border-white/[.14]">
+    <section id="contact" aria-labelledby="contact-heading" className="py-12 sm:py-16 border-t border-[--card-border]">
       <Container>
         <h2 id="contact-heading" className="text-xl font-semibold tracking-tight">Contact</h2>
         <p className="mt-4 text-foreground/80">

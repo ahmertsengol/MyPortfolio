@@ -17,7 +17,7 @@ export default function Section({ id, title, children, className }: Props) {
             {title}
           </h2>
         )}
-        <div className="rounded-xl border border-white/10 bg-black/30 backdrop-blur p-5">
+        <div className="rounded-xl border border-[--card-border] bg-[--card-bg] backdrop-blur p-5">
           {children}
         </div>
       </Container>

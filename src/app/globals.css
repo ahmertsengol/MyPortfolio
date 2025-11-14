@@ -4,11 +4,26 @@
   --background: #ffffff;
   --foreground: #0a0a0a;
   --muted: #6b7280;
+
+  /* Light mode semantic colors */
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --button-border: rgba(0, 0, 0, 0.15);
+  --button-bg: rgba(0, 0, 0, 0.05);
+  --button-hover: rgba(0, 0, 0, 0.1);
+  --text-primary: #0a0a0a;
+  --text-secondary: rgba(10, 10, 10, 0.7);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -18,6 +33,17 @@
     --background: #0a0a0a;
     --foreground: #ededed;
     --muted: #9ca3af;
+
+    /* Dark mode semantic colors */
+    --card-bg: rgba(0, 0, 0, 0.3);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --button-border: rgba(255, 255, 255, 0.15);
+    --button-bg: rgba(255, 255, 255, 0.1);
+    --button-hover: rgba(255, 255, 255, 0.15);
+    --text-primary: #ededed;
+    --text-secondary: rgba(237, 237, 237, 0.8);
   }
 }
 

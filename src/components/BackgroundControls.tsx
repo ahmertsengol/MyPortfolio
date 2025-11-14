@@ -43,7 +43,7 @@ export default function BackgroundControls(props: Props) {
   );
 
   return (
-    <div className="w-full rounded-2xl border border-white/15 bg-black/40 backdrop-blur p-4 shadow-xl">
+    <div className="w-full rounded-2xl border border-[--glass-border] bg-[--glass-bg] backdrop-blur p-4 shadow-xl">
       <h3 className="text-xl font-semibold mb-2">Customize</h3>
       
       <Row label="Scale">

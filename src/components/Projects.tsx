@@ -24,7 +24,7 @@ const projects: Project[] = [
 
 export default function Projects() {
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="py-12 sm:py-16 border-t border-black/[.08] dark:border-white/[.14]">
+    <section id="projects" aria-labelledby="projects-heading" className="py-12 sm:py-16 border-t border-[--card-border]">
       <Container>
         <h2 id="projects-heading" className="text-xl font-semibold tracking-tight">Öne Çıkan Projeler</h2>
         <ul className="mt-6 grid gap-6 sm:grid-cols-2">

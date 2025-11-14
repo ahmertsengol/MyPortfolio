@@ -62,8 +62,8 @@ export default function Background({
           brightness={brightness ?? 0.35}
         />
         {/* Softer overlays so tint is visible */}
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_70%)] bg-black/10" />
+        <div className="absolute inset-0 bg-background/20" />
+        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_70%)] bg-background/10" />
       </div>
     );
   }

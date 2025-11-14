@@ -11,8 +11,8 @@ export default function ProfileCard({ user }: Props) {
   return (
     <section className="pt-16 sm:pt-20" aria-labelledby="profile-heading">
       <Container>
-        <div className="flex items-start gap-6 rounded-xl border border-white/10 bg-black/30 backdrop-blur p-6">
-          <div className="relative h-24 w-24 rounded-full overflow-hidden ring-1 ring-white/20">
+        <div className="flex items-start gap-6 rounded-xl border border-[--card-border] bg-[--card-bg] backdrop-blur p-6">
+          <div className="relative h-24 w-24 rounded-full overflow-hidden ring-1 ring-[--card-border]">
             <Image src={user.avatar_url} alt={user.name ?? user.login} fill sizes="80px" className="object-cover" />
           </div>
           <div>

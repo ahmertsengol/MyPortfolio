@@ -15,7 +15,7 @@ const items: Item[] = [
 export default function Timeline() {
   return (
     <Section id="about" title="Experience & Education">
-      <ol className="relative border-l border-white/10 pl-6">
+      <ol className="relative border-l border-[--card-border] pl-6">
         {items.map((it) => (
           <li key={`${it.title}-${it.period}`} className="mb-8 last:mb-0">
             <span className="relative mb-8 last:mb-0 after:absolute after:left-[-1.125rem] after:top-3 after:bottom-[-1.5rem] after:w-px after:bg-[var(--accent)] after:opacity-20 last:after:hidden" />
