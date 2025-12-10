@@ -20,7 +20,7 @@ const Skills = () => {
     },
     {
       title: "AI & ML",
-      skills: ["TensorFlow", "OpenCV", "MediaPipe","PyTorch", "HuggingFace","Gemini API", "RAG", "LLM"]
+      skills: ["TensorFlow", "OpenCV", "MediaPipe","PyTorch","Gemini API", "RAG", "LLM"]
     }
   ];
 
