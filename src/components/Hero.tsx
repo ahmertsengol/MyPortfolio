@@ -4,6 +4,7 @@ import { useGitHubUser } from "@/hooks/useGitHub";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
 import LogoLoop from "./LogoLoop";
+import Terminal from "@/components/ui/terminal";
 
 const Hero = () => {
   const { data: user, isLoading } = useGitHubUser();
@@ -73,16 +74,9 @@ const Hero = () => {
             </div>
 
             {/* Description */}
-            {isLoading ? (
-               <div className="space-y-2 max-w-xl">
-                 <Skeleton className="h-4 w-full" />
-                 <Skeleton className="h-4 w-5/6" />
-               </div>
-            ) : (
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-                {t('hero.description')}
-              </p>
-            )}
+            <div className="w-full max-w-xl mb-10">
+              <Terminal content={t('hero.description')} />
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
