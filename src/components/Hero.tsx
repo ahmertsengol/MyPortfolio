@@ -27,12 +27,24 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border rounded-full mb-8">
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
           <span className="text-sm text-muted-foreground">{t('hero.badge')}</span>
         </div>
+
+        {/* Avatar - Hero Section */}
+        {!isLoading && user?.avatar_url && (
+          <div className="mb-8 relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 blur animate-spin-slow transition duration-1000"></div>
+            <img 
+              src={user.avatar_url} 
+              alt={user.name} 
+              className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-background shadow-2xl object-cover"
+            />
+          </div>
+        )}
 
         {/* Name */}
         {isLoading ? (

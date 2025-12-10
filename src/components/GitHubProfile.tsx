@@ -120,19 +120,29 @@ const GitHubProfile = () => {
             </div>
           </div>
 
-          {/* Contribution Graph */}
+          {/* Contribution Graph - Theme Aware Styling */}
           <div className="mt-12 border-t border-border/50 pt-8">
-             <h4 className="text-lg font-semibold mb-4 text-foreground/90 flex items-center gap-2">
+             <h4 className="text-lg font-semibold mb-6 text-foreground/90 flex items-center gap-2">
                <GitFork className="h-5 w-5 text-primary" />
                {t('profile.githubGraph')}
              </h4>
-             <div className="w-full overflow-hidden rounded-xl border border-border/50 bg-background/50 p-4 shadow-inner">
+             
+             <div className="w-full overflow-hidden rounded-xl border border-border/50 bg-background/50 p-6 shadow-inner relative group">
+               {/* Light Mode Overlay (Parlaklık efekti) */}
+               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+               
+               {/* 
+                  Dark/Light uyumu için CSS hileleri:
+                  Resim siyah-beyaz (grayscale) yapılıp, tema rengine (primary) boyanacak (sepia/hue-rotate).
+                  veya daha basiti: Dark modda invert edip renkleri düzeltmek.
+               */}
                <img 
                  src={`https://ghchart.rshah.org/${user.login}`} 
                  alt="GitHub Contribution Graph"
-                 className="w-full h-auto opacity-80 hover:opacity-100 transition-opacity"
+                 className="w-full h-auto dark:filter dark:invert dark:hue-rotate-180 dark:brightness-110 dark:contrast-125 transition-all duration-500 opacity-90 hover:opacity-100"
                />
-               <p className="text-xs text-muted-foreground mt-2 text-center">
+               
+               <p className="text-xs text-muted-foreground mt-4 text-center font-medium">
                  {t('profile.graphDesc')}
                </p>
              </div>
