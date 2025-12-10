@@ -10,7 +10,7 @@ const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/50" />
@@ -28,87 +28,95 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border rounded-full mb-8">
-          <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span className="text-sm text-muted-foreground">{t('hero.badge')}</span>
-        </div>
-
-        {/* Avatar - Hero Section */}
-        {!isLoading && user?.avatar_url && (
-          <div className="mb-8 relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 blur animate-spin-slow transition duration-1000"></div>
-            <img 
-              src={user.avatar_url} 
-              alt={user.name} 
-              className="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-background shadow-2xl object-cover"
-            />
+      <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center justify-center min-h-[calc(100vh-8rem)]">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
+          {/* Left Column: Avatar */}
+          <div className="flex justify-center md:justify-end">
+            {!isLoading && user?.avatar_url && (
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-75 group-hover:opacity-100 blur animate-spin-slow transition duration-1000"></div>
+                <img 
+                  src={user.avatar_url} 
+                  alt={user.name} 
+                  className="relative w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-background shadow-2xl object-cover"
+                />
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Name */}
-        {isLoading ? (
-           <Skeleton className="h-16 w-3/4 mx-auto mb-6" />
-        ) : (
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
-            {user?.name || "Ahmet Mert Şengöl"}
-          </h1>
-        )}
+          {/* Right Column: Text Content */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border rounded-full">
+              <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+              <span className="text-sm text-muted-foreground">{t('hero.badge')}</span>
+            </div>
 
-        {/* Location */}
-        <div className="flex items-center justify-center gap-2 text-muted-foreground mb-8">
-          <MapPin className="h-4 w-4" />
-          {isLoading ? (
-             <Skeleton className="h-4 w-32" />
-          ) : (
-            <span className="text-sm">{user?.location || t('hero.location')}</span>
-          )}
-        </div>
+            {/* Name */}
+            {isLoading ? (
+               <Skeleton className="h-16 w-3/4 mb-6" />
+            ) : (
+              <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight">
+                {user?.name || "Ahmet Mert Şengöl"}
+              </h1>
+            )}
 
-        {/* Description */}
-        {isLoading ? (
-           <div className="space-y-2 mb-10 max-w-2xl mx-auto">
-             <Skeleton className="h-4 w-full" />
-             <Skeleton className="h-4 w-5/6 mx-auto" />
-           </div>
-        ) : (
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            {t('hero.description')}
-          </p>
-        )}
+            {/* Location */}
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <MapPin className="h-4 w-4" />
+              {isLoading ? (
+                 <Skeleton className="h-4 w-32" />
+              ) : (
+                <span className="text-sm">{user?.location || t('hero.location')}</span>
+              )}
+            </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
-          <Button
-            asChild
-            size="lg"
-            className="bg-foreground text-background hover:bg-foreground/90"
-          >
-            <a href="#projects">{t('hero.viewProjects')}</a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="border-border hover:bg-secondary"
-          >
-            <a href={user?.html_url || "https://github.com/ahmertsengol"} target="_blank" rel="noopener noreferrer">
-              <Github className="h-4 w-4 mr-2" />
-              GitHub
-            </a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="border-border hover:bg-secondary"
-          >
-            <a href={`https://linkedin.com/in/${user?.login || "ahmertsengol"}`} target="_blank" rel="noopener noreferrer">
-              <Linkedin className="h-4 w-4 mr-2" />
-              LinkedIn
-            </a>
-          </Button>
+            {/* Description */}
+            {isLoading ? (
+               <div className="space-y-2 max-w-xl">
+                 <Skeleton className="h-4 w-full" />
+                 <Skeleton className="h-4 w-5/6" />
+               </div>
+            ) : (
+              <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
+                {t('hero.description')}
+              </p>
+            )}
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-foreground text-background hover:bg-foreground/90"
+              >
+                <a href="#projects">{t('hero.viewProjects')}</a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-border hover:bg-secondary"
+              >
+                <a href={user?.html_url || "https://github.com/ahmertsengol"} target="_blank" rel="noopener noreferrer">
+                  <Github className="h-4 w-4 mr-2" />
+                  GitHub
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-border hover:bg-secondary"
+              >
+                <a href={`https://linkedin.com/in/${user?.login || "ahmertsengol"}`} target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="h-4 w-4 mr-2" />
+                  LinkedIn
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="mt-16 w-full max-w-5xl mx-auto">

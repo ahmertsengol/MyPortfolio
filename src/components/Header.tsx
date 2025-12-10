@@ -46,7 +46,7 @@ const Header = () => {
       <div className="max-w-6xl mx-auto px-6 py-4">
         <nav className="flex items-center justify-between">
           <a href="#" className="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform">
-            Mert.dev
+            ahmertsengol.com
           </a>
 
           {/* Desktop Navigation */}

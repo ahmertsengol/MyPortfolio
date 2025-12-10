@@ -22,7 +22,7 @@ i18n
           hero: {
             badge: "Software Engineer & Developer",
             location: "Turkey",
-            description: "I’m Ahmet Mert. I am a software engineer who combines artificial intelligence, web technologies, and modern software architectures to design high-performance, scalable, and self-learning systems.",
+            description: "My name is Ahmet Mert. I am a full-stack developer who designs high-performance, scalable, and self-learning systems using artificial intelligence, web technologies, and modern software architectures :)",
             viewProjects: "View Projects",
             scrollDown: "Scroll Down"
           },
@@ -100,7 +100,7 @@ i18n
           hero: {
             badge: "Yazılım Mühendisi & Geliştirici",
             location: "Türkiye",
-            description: "Merhaba! Ben yenilikçi ve akıllı dijital çözümler geliştirmeye tutkulu bir Full-Stack Developer'ım. Fırat Üniversitesi'nde eğitimime devam ederken aynı zamanda AI destekli web teknolojilerinde uzmanlığımı genişletiyorum. Yazılım geliştirme benim için sadece kod yazmak değil; gerçek dünya problemlerini çözmek, kullanıcı deneyimlerini iyileştirmek ve sürekli yeni şeyler öğrenmektir.",
+            description: "Ben Ahmet Mert. Yapay zekâ, web teknolojileri ve modern yazılım mimarilerini kullanarak yüksek performanslı, ölçeklenebilir ve kendi kendine öğrenebilen sistemler tasarlayan bir yazılımcıyım :)",
             viewProjects: "Projeleri İncele",
             scrollDown: "Aşağı Kaydır"
           },
