@@ -1,7 +1,11 @@
 import { Github, Linkedin, MapPin, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useGitHubUser } from "@/hooks/useGitHub";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Hero = () => {
+  const { data: user, isLoading } = useGitHubUser();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
@@ -25,24 +29,39 @@ const Hero = () => {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border rounded-full mb-8">
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span className="text-sm text-muted-foreground">Full Stack Developer & AI Engineer</span>
+          <span className="text-sm text-muted-foreground">Software Engineer & Developer</span>
         </div>
 
         {/* Name */}
-        <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
-          Ahmet Mert Şengöl
-        </h1>
+        {isLoading ? (
+           <Skeleton className="h-16 w-3/4 mx-auto mb-6" />
+        ) : (
+          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
+            {user?.name || "Ahmet Mert Şengöl"}
+          </h1>
+        )}
 
         {/* Location */}
         <div className="flex items-center justify-center gap-2 text-muted-foreground mb-8">
           <MapPin className="h-4 w-4" />
-          <span className="text-sm">Turkey</span>
+          {isLoading ? (
+             <Skeleton className="h-4 w-32" />
+          ) : (
+            <span className="text-sm">{user?.location || "Turkey"}</span>
+          )}
         </div>
 
         {/* Description */}
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-          Hi, I'm Ahmet Mert — Full Stack Developer & AI Engineer from Turkey. I build scalable web applications, AI-driven systems, and modern cloud-native architectures.
-        </p>
+        {isLoading ? (
+           <div className="space-y-2 mb-10 max-w-2xl mx-auto">
+             <Skeleton className="h-4 w-full" />
+             <Skeleton className="h-4 w-5/6 mx-auto" />
+           </div>
+        ) : (
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            {user?.bio || "Building scalable modern web applications and AI solutions."}
+          </p>
+        )}
 
         {/* CTA Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
@@ -59,7 +78,7 @@ const Hero = () => {
             size="lg"
             className="border-border hover:bg-secondary"
           >
-            <a href="https://github.com/ahmertsengol" target="_blank" rel="noopener noreferrer">
+            <a href={user?.html_url || "https://github.com/ahmertsengol"} target="_blank" rel="noopener noreferrer">
               <Github className="h-4 w-4 mr-2" />
               GitHub
             </a>
@@ -70,7 +89,7 @@ const Hero = () => {
             size="lg"
             className="border-border hover:bg-secondary"
           >
-            <a href="https://linkedin.com/in/ahmertsengol" target="_blank" rel="noopener noreferrer">
+            <a href={`https://linkedin.com/in/${user?.login || "ahmertsengol"}`} target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-4 w-4 mr-2" />
               LinkedIn
             </a>
