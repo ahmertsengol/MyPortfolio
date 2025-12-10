@@ -2,9 +2,11 @@ import { Github, Linkedin, MapPin, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGitHubUser } from "@/hooks/useGitHub";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
   const { data: user, isLoading } = useGitHubUser();
+  const { t } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -29,7 +31,7 @@ const Hero = () => {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border rounded-full mb-8">
           <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span className="text-sm text-muted-foreground">Software Engineer & Developer</span>
+          <span className="text-sm text-muted-foreground">{t('hero.badge')}</span>
         </div>
 
         {/* Name */}
@@ -47,7 +49,7 @@ const Hero = () => {
           {isLoading ? (
              <Skeleton className="h-4 w-32" />
           ) : (
-            <span className="text-sm">{user?.location || "Turkey"}</span>
+            <span className="text-sm">{user?.location || t('hero.location')}</span>
           )}
         </div>
 
@@ -59,7 +61,7 @@ const Hero = () => {
            </div>
         ) : (
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            {user?.bio || "Building scalable modern web applications and AI solutions."}
+            {user?.bio || t('hero.description')}
           </p>
         )}
 
@@ -70,7 +72,7 @@ const Hero = () => {
             size="lg"
             className="bg-foreground text-background hover:bg-foreground/90"
           >
-            <a href="#projects">Projeleri İncele</a>
+            <a href="#projects">{t('hero.viewProjects')}</a>
           </Button>
           <Button
             asChild
@@ -101,7 +103,7 @@ const Hero = () => {
           href="#projects"
           className="inline-flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
-          <span className="text-xs uppercase tracking-widest">Aşağı Kaydır</span>
+          <span className="text-xs uppercase tracking-widest">{t('hero.scrollDown')}</span>
           <ArrowDown className="h-4 w-4 animate-bounce" />
         </a>
       </div>

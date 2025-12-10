@@ -2,10 +2,12 @@ import { Star, GitFork, ExternalLink, Loader2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useGitHubUser, useGitHubRepos } from "@/hooks/useGitHub";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 const GitHubProfile = () => {
   const { data: user, isLoading: isUserLoading } = useGitHubUser();
   const { data: repos, isLoading: isReposLoading } = useGitHubRepos();
+  const { t } = useTranslation();
 
   // GitHub renkleri (Basit bir haritalama)
   const getLanguageColor = (language: string | null) => {
@@ -52,21 +54,28 @@ const GitHubProfile = () => {
     <section id="projects" className="py-24 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         {/* Profile Card */}
+        {/* Profile Card */}
         <Card className="bg-card/50 backdrop-blur-sm border-border p-8 mb-16 shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+            
+            {/* Animated Avatar */}
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-purple-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-1000 group-hover:duration-200"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full opacity-70 group-hover:opacity-100 blur-md animate-spin-slow transition duration-1000"></div>
+              <div className="absolute -inset-2 bg-gradient-to-tr from-blue-500 to-teal-500 rounded-full opacity-30 animate-pulse blur-xl"></div>
               <img
                 src={user.avatar_url}
                 alt={user.name}
-                className="relative w-32 h-32 rounded-full border-4 border-background shadow-2xl"
+                className="relative w-36 h-36 rounded-full border-4 border-background shadow-2xl object-cover transform group-hover:scale-105 transition-transform duration-500"
               />
+              <div className="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-4 border-background rounded-full z-10 animate-bounce"></div>
             </div>
             
             <div className="text-center md:text-left flex-1 space-y-4">
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-2">{user.name}</h2>
-                <h3 className="text-xl text-primary font-medium">{user.login}</h3>
+                <h2 className="text-4xl font-bold text-foreground mb-1 tracking-tight">{user.name}</h2>
+                <h3 className="text-xl text-primary font-medium flex items-center justify-center md:justify-start gap-2">
+                  @{user.login}
+                </h3>
               </div>
               
               <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
@@ -74,14 +83,17 @@ const GitHubProfile = () => {
               </p>
               
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 pt-2">
-                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full">
+                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full border border-border/50">
                   📍 {user.location}
                 </span>
-                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full">
-                  <Star className="h-4 w-4 text-yellow-500" /> {stats.stars} Total Stars
+                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full border border-border/50">
+                  <Star className="h-4 w-4 text-yellow-500" /> {stats.stars} {t('profile.stars')}
                 </span>
-                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full">
-                  📚 {user.public_repos} Repositories
+                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full border border-border/50">
+                  📚 {user.public_repos} {t('profile.repos')}
+                </span>
+                <span className="text-sm text-foreground/80 flex items-center gap-2 bg-secondary/50 px-4 py-2 rounded-full border border-border/50">
+                  👥 {user.followers} {t('profile.followers')}
                 </span>
               </div>
             </div>
@@ -91,28 +103,46 @@ const GitHubProfile = () => {
                 href={user.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-all shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 <ExternalLink className="h-4 w-4" />
-                GitHub Profile
+                GitHub
               </a>
               <a
                 href={`https://linkedin.com/in/${user.login}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#0077b5] text-white font-medium rounded-lg hover:bg-[#006399] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
                 <ExternalLink className="h-4 w-4" />
                 LinkedIn
               </a>
             </div>
           </div>
+
+          {/* Contribution Graph */}
+          <div className="mt-12 border-t border-border/50 pt-8">
+             <h4 className="text-lg font-semibold mb-4 text-foreground/90 flex items-center gap-2">
+               <GitFork className="h-5 w-5 text-primary" />
+               {t('profile.githubGraph')}
+             </h4>
+             <div className="w-full overflow-hidden rounded-xl border border-border/50 bg-background/50 p-4 shadow-inner">
+               <img 
+                 src={`https://ghchart.rshah.org/${user.login}`} 
+                 alt="GitHub Contribution Graph"
+                 className="w-full h-auto opacity-80 hover:opacity-100 transition-opacity"
+               />
+               <p className="text-xs text-muted-foreground mt-2 text-center">
+                 {t('profile.graphDesc')}
+               </p>
+             </div>
+          </div>
         </Card>
 
         {/* Repositories Grid */}
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-2xl font-bold text-foreground relative inline-block">
-            Öne Çıkan Projeler
+            {t('profile.featuredProjects')}
             <span className="absolute -bottom-2 left-0 w-1/3 h-1 bg-primary rounded-full"></span>
           </h3>
           <a 
@@ -121,7 +151,7 @@ const GitHubProfile = () => {
             rel="noopener noreferrer" 
             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
           >
-            Tümünü Gör <ExternalLink className="h-3 w-3" />
+            {t('profile.viewAll')} <ExternalLink className="h-3 w-3" />
           </a>
         </div>
 
