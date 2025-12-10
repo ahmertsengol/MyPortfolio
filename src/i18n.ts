@@ -81,7 +81,7 @@ i18n
           },
           footer: {
             rights: "All rights reserved.",
-            madeWith: "Made with"
+            madeWith: "Made by ahmertsengol"
           },
           notfound: {
             title: "404",

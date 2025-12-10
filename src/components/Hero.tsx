@@ -111,7 +111,7 @@ const Hero = () => {
           </Button>
         </div>
 
-        <div className="mt-16 w-full max-w-5xl mx-auto opacity-0 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500 fill-mode-forwards">
+        <div className="mt-16 w-full max-w-5xl mx-auto">
            <LogoLoop />
         </div>
 
