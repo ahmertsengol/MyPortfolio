@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useGitHubUser } from "@/hooks/useGitHub";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "react-i18next";
+import LogoLoop from "./LogoLoop";
 
 const Hero = () => {
   const { data: user, isLoading } = useGitHubUser();
@@ -73,7 +74,7 @@ const Hero = () => {
            </div>
         ) : (
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            {user?.bio || t('hero.description')}
+            {t('hero.description')}
           </p>
         )}
 
@@ -110,10 +111,14 @@ const Hero = () => {
           </Button>
         </div>
 
+        <div className="mt-16 w-full max-w-5xl mx-auto opacity-0 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-500 fill-mode-forwards">
+           <LogoLoop />
+        </div>
+
         {/* Scroll Indicator */}
         <a
           href="#projects"
-          className="inline-flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mt-16"
         >
           <span className="text-xs uppercase tracking-widest">{t('hero.scrollDown')}</span>
           <ArrowDown className="h-4 w-4 animate-bounce" />

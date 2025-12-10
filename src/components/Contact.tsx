@@ -1,8 +1,11 @@
-import { Mail, Github, Linkedin, Globe } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   const links = [
     {
       icon: Github,
@@ -18,7 +21,7 @@ const Contact = () => {
     },
     {
       icon: Mail,
-      label: "E-posta",
+      label: t('contact.email'),
       href: "mailto:ahmertsengol@gmail.com",
       username: "ahmertsengol@gmail.com"
     }
@@ -28,11 +31,10 @@ const Contact = () => {
     <section id="contact" className="py-24 px-6 bg-secondary/20">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-foreground mb-4">
-          İletişime Geç
+          {t('contact.title')}
         </h2>
         <p className="text-muted-foreground mb-12 max-w-xl mx-auto">
-          İşbirliği veya proje fırsatları için benimle iletişime geçebilirsiniz. 
-          Yeni projeler ve fikirler için her zaman açığım.
+          {t('contact.description')}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
@@ -60,7 +62,7 @@ const Contact = () => {
         >
           <a href="mailto:ahmertsengol@gmail.com">
             <Mail className="h-4 w-4 mr-2" />
-            E-posta Gönder
+            {t('contact.sendEmail')}
           </a>
         </Button>
       </div>

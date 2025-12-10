@@ -85,6 +85,7 @@ All colors MUST be HSL.
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 85% 97%;
 
+    /* Restored Dark Theme Variables */
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 0 0% 95%;
@@ -107,6 +108,9 @@ All colors MUST be HSL.
     --glow-accent: 0 0 40px hsl(142 70% 45% / 0.15);
   }
 }
+
+
+
 
 @layer base {
   * {

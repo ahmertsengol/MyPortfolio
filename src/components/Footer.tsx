@@ -1,13 +1,15 @@
 import { Github, Linkedin, Heart } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="py-8 px-6 border-t border-border">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground">
-          © {currentYear} Ahmet Mert Şengöl. Tüm hakları saklıdır.
+          © {currentYear} Ahmet Mert Şengöl. {t('footer.rights')}
         </p>
         
         <div className="flex items-center gap-4">
@@ -32,7 +34,7 @@ const Footer = () => {
         </div>
 
         <p className="text-sm text-muted-foreground flex items-center gap-1">
-          <Heart className="h-3.5 w-3.5 text-destructive" /> ile yapıldı
+          {t('footer.madeWith')} <Heart className="h-3.5 w-3.5 text-destructive" />
         </p>
       </div>
     </footer>

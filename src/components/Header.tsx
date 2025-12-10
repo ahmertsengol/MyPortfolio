@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, Globe } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "next-themes";
+import SunMoon from "@/components/ui/sun-moon";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +15,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,44 +67,29 @@ const Header = () => {
 
             <div className="flex items-center gap-2 border-l pl-6 border-border/50">
               {/* Language Switcher */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full w-9 h-9">
-                    <Globe className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                    <span className="sr-only">Toggle language</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => changeLanguage('tr')}>
-                    🇹🇷 Türkçe
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => changeLanguage('en')}>
-                    🇬🇧 English
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="flex items-center gap-1 bg-secondary/20 rounded-full p-1 border border-border/50 min-w-[6.5rem] justify-center">
+                <Button 
+                  variant={i18n.language === 'tr' ? 'secondary' : 'ghost'} 
+                  size="sm" 
+                  onClick={() => changeLanguage('tr')}
+                  className={`h-7 px-3 text-xs rounded-full transition-all w-12 ${i18n.language === 'tr' ? 'bg-background shadow-sm font-bold text-primary' : 'text-muted-foreground hover:bg-transparent hover:text-foreground'}`}
+                >
+                  TR
+                </Button>
+                <Button 
+                  variant={i18n.language === 'en' ? 'secondary' : 'ghost'} 
+                  size="sm" 
+                  onClick={() => changeLanguage('en')}
+                  className={`h-7 px-3 text-xs rounded-full transition-all w-12 ${i18n.language === 'en' ? 'bg-background shadow-sm font-bold text-primary' : 'text-muted-foreground hover:bg-transparent hover:text-foreground'}`}
+                >
+                  EN
+                </Button>
+              </div>
 
               {/* Theme Toggle */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full w-9 h-9">
-                    <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                    <span className="sr-only">Toggle theme</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => setTheme("light")}>
-                    Light
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("dark")}>
-                    Dark
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setTheme("system")}>
-                    System
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="scale-50 origin-right">
+                <SunMoon checked={resolvedTheme === 'dark'} onChange={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} />
+              </div>
             </div>
           </div>
 
@@ -114,7 +100,7 @@ const Header = () => {
                 variant="ghost" 
                 size="icon" 
                 className="rounded-full w-9 h-9"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
              >
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
