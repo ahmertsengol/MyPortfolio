@@ -1,17 +1,58 @@
-import Section from "@/components/Section";
-import { resumeData } from "@/data/resume";
+import { Badge } from "@/components/ui/badge";
 
-export default function Skills() {
+const Skills = () => {
+  const skillCategories = [
+    {
+      title: "Programlama Dilleri",
+      skills: ["Python", "JavaScript", "TypeScript", "C#", "Java"]
+    },
+    {
+      title: "Frontend",
+      skills: ["React.js", "Next.js", "TailwindCSS", "HTML/CSS"]
+    },
+    {
+      title: "Backend",
+      skills: [".NET", "Node.js", "Express.js", "REST API"]
+    },
+    {
+      title: "DevOps & Araçlar",
+      skills: ["Docker", "AWS", "Git", "GitHub", "Linux"]
+    },
+    {
+      title: "AI & ML",
+      skills: ["TensorFlow", "OpenCV", "MediaPipe", "Gemini API", "RAG"]
+    }
+  ];
+
   return (
-    <Section id="skills" title="Skills">
-      <div className="flex flex-wrap gap-2">
-        {resumeData.skills.map((s) => (
-          <span key={s} className="text-xs rounded-full border border-[--button-border] bg-[--button-bg] px-3 py-1">
-            {s}
-          </span>
-        ))}
+    <section className="py-24 px-6 bg-secondary/20">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-foreground mb-12 text-center">
+          Yetenekler
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skillCategories.map((category) => (
+            <div key={category.title}>
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant="secondary"
+                    className="bg-card border border-border text-foreground hover:bg-muted"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
-}
+};
 
+export default Skills;

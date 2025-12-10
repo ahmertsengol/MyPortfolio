@@ -1,48 +1,85 @@
-"use client";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-import Link from "next/link";
-import Container from "@/components/Container";
-import { useEffect, useState } from "react";
-
-export default function Header() {
-  const [active, setActive] = useState<string>("");
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const sections = ["projects", "about", "contact"]; 
-    const observers: IntersectionObserver[] = [];
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) setActive(id);
-          });
-        },
-        { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
-      );
-      io.observe(el);
-      observers.push(io);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const linkCls = (id: string) =>
-    `hover:opacity-80 transition-opacity ${active === id ? "text-foreground" : "text-foreground/80"}`;
+  const navItems = [
+    { label: "Projeler", href: "#projects" },
+    { label: "Hakkımda", href: "#about" },
+    { label: "İletişim", href: "#contact" },
+  ];
 
   return (
-    <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <Container className="flex items-center justify-between h-14 rounded-b-xl border-x border-b border-[--glass-border] bg-[--glass-bg]">
-        <Link href="/" className="font-semibold tracking-tight">
-          Ahmet Mert Sengöl
-        </Link>
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="#projects" className={linkCls("projects")}>Projects</Link>
-          <Link href="#about" className={linkCls("about")}>About</Link>
-          <Link href="#contact" className={linkCls("contact")}>Contact</Link>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg border-b border-border"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-6 py-4">
+        <nav className="flex items-center justify-between">
+          <a href="#" className="text-lg font-semibold text-foreground">
+            Ahmet Mert Şengöl
+          </a>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </nav>
-      </Container>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-border pt-4">
+            <ul className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </header>
   );
-}
+};
 
+export default Header;
